@@ -1,0 +1,83 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:social_media_network/app/core/constants/app_colors.dart';
+import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:social_media_network/app/presentation/pages/categoriespage/posts_page.dart';
+import 'package:social_media_network/app/presentation/pages/itemspage/items_page.dart';
+import 'package:social_media_network/app/presentation/pages/homePage/logic/home_page_controller.dart';
+import 'package:social_media_network/app/presentation/pages/homePage/widgets/bubble_items.dart';
+import 'package:social_media_network/app/presentation/pages/chatspage/chats_page.dart';
+import 'package:social_media_network/app/presentation/pages/additempage/add_item_page.dart';
+import 'package:social_media_network/app/presentation/pages/settingsPage/settings_page.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Widget> pages = const [
+    CategoriesPage(),
+    ChatsPage(),
+    AddItemPage(),
+    ItemsPage(),
+    SettingsPage(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomePageController>(
+      init: HomePageController.instance,
+      builder: (controller) {
+        return Scaffold(
+          bottomNavigationBar: BubbleBottomBar(
+            hasNotch: false,
+            opacity: 0.9,
+            currentIndex: controller.currentIndex,
+            onTap: controller.switchPages,
+            elevation: 3.0,
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(10.0),
+            ),
+            items: [
+              //home page
+              bubbleItems(
+                title: "categories",
+                backgroundColor: customeColor1,
+                iamge: postImg,
+              ),
+
+              // search page
+              bubbleItems(
+                title: "chats",
+                backgroundColor: customeColor2,
+                iamge: chatImg,
+              ),
+              bubbleItems(
+                title: "addItem",
+                backgroundColor: customeColor3,
+                iamge: addItemImg,
+              ),
+              bubbleItems(
+                title: "items",
+                backgroundColor: customeColor4,
+                iamge: itemsImg,
+              ),
+              bubbleItems(
+                title: "settings",
+                backgroundColor: customRedColor,
+                iamge: settingsImg,
+              ),
+            ],
+          ),
+          body: SafeArea(
+            top: false,
+            child: pages.elementAt(controller.currentIndex),
+          ),
+        );
+      },
+    );
+  }
+}
