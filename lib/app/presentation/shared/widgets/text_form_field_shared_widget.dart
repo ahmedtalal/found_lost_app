@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
 
 class TextFormFieldSharedWidget extends StatelessWidget {
   final String label, hint, initialValue;
@@ -57,7 +57,8 @@ class TextFormFieldSharedWidget extends StatelessWidget {
               size: 22,
               color: Colors.grey,
             ),
-            suffixIcon: label.toLowerCase() == "password"
+            suffixIcon: label.toLowerCase() == "password" ||
+                    label.toLowerCase() == "confirm password"
                 ? IconButton(
                     onPressed: () {
                       setState(() {
@@ -74,8 +75,10 @@ class TextFormFieldSharedWidget extends StatelessWidget {
                   )
                 : null,
           ),
-          obscureText:
-              label.toLowerCase() == "password" ? passwordObscure! : false,
+          obscureText: label.toLowerCase() == "password" ||
+                  label.toLowerCase() == "confirm password "
+              ? passwordObscure!
+              : false,
           enabled: true,
         );
       },

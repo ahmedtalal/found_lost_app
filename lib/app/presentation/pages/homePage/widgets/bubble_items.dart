@@ -1,6 +1,6 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
 
 BubbleBottomBarItem bubbleItems({
   required String title,

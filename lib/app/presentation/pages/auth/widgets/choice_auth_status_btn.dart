@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/core/constants/app_colors.dart';
-import 'package:social_media_network/app/presentation/pages/auth/logic/getx/auth_controller.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
+import 'package:found_lost_app/app/core/constants/app_colors.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
 
 class ChoiceAuthStatusBtn extends StatelessWidget {
   final AuthController controller;

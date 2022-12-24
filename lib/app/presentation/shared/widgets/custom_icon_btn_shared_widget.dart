@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
 
 class CustomIconBtnSharedWidget extends StatelessWidget {
   const CustomIconBtnSharedWidget(

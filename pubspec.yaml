@@ -1,4 +1,4 @@
-name: social_media_network
+name: found_lost_app
 description: A new Flutter project.
 
 publish_to: 'none' 
@@ -16,6 +16,15 @@ dependencies:
   get_storage:
   introduction_screen:
   bubble_bottom_bar:
+  pinput: ^2.2.12
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.1
+  cloud_firestore: ^4.2.0
+  firebase_storage: ^11.0.8
+  firebase_analytics: ^10.0.7
+  uuid: ^3.0.7
+
+
   
 dev_dependencies:
   flutter_test:

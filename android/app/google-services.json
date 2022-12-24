@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "931369424400",
+    "project_id": "report-losses",
+    "storage_bucket": "report-losses.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931369424400:android:5558645f02d2c48b429c95",
+        "android_client_info": {
+          "package_name": "social.appcoder.social_media_network"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931369424400-cs3p7bothadnpb1rkbrdrjqp76td4j01.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC44DYAhLAYGbiBmtjXP061VgG8fanbd3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931369424400-cs3p7bothadnpb1rkbrdrjqp76td4j01.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

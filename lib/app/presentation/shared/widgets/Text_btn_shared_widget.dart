@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
 
 class TextBtnSharedWidget extends StatelessWidget {
   final String? title;
@@ -21,7 +21,7 @@ class TextBtnSharedWidget extends StatelessWidget {
       onTap: onClick!,
       child: Container(
         width: ScreenHandler.getScreenWidth(context) / 1.15,
-        height: ScreenHandler.getScreenHeight(context) / 13,
+        height: ScreenHandler.getScreenHeight(context) / 14,
         padding: const EdgeInsets.all(8),
         alignment: Alignment.center,
         decoration: BoxDecoration(

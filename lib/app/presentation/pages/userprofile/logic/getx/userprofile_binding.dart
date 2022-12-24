@@ -1,5 +1,5 @@
 import 'package:get/instance_manager.dart';
-import 'package:social_media_network/app/presentation/pages/userprofile/logic/getx/userprofile_controller.dart';
+import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/userprofile_controller.dart';
 
 class UserProfileBinding extends Bindings {
   @override

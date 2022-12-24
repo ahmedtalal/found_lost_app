@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/core/constants/app_colors.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/core/constants/app_colors.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
 
 class TextLinkSharedWidget extends StatelessWidget {
   final Function() onClick;

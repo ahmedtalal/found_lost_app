@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class UserProfileController extends GetxController {
-  static UserProfileController _userProfileController =
+  static final UserProfileController _userProfileController =
       UserProfileController._internal();
   UserProfileController._internal();
   static UserProfileController get instance => _userProfileController;
@@ -35,36 +35,6 @@ class UserProfileController extends GetxController {
 
   onChangeImage(String? newValue) {
     userProfileImage = newValue!;
-    update();
-  }
-
-  onChangefirstName(String? newValue) {
-    firstName = newValue!;
-    update();
-  }
-
-  onChangeLastName(String? newValue) {
-    lastName = newValue!;
-    update();
-  }
-
-  onChangeAddress(String? newValue) {
-    address = newValue!;
-    update();
-  }
-
-  onChangeBioInfo(String? newValue) {
-    bioInfo = newValue!;
-    update();
-  }
-
-  onChangeLocationAddress(String? newValue) {
-    locationAdrese = newValue!;
-    update();
-  }
-
-  onChangeSex(bool? newValue) {
-    sex = newValue!;
     update();
   }
 

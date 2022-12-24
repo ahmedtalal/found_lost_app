@@ -1,15 +1,15 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:social_media_network/app/core/constants/app_colors.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
-import 'package:social_media_network/app/presentation/pages/categoriespage/posts_page.dart';
-import 'package:social_media_network/app/presentation/pages/itemspage/items_page.dart';
-import 'package:social_media_network/app/presentation/pages/homePage/logic/home_page_controller.dart';
-import 'package:social_media_network/app/presentation/pages/homePage/widgets/bubble_items.dart';
-import 'package:social_media_network/app/presentation/pages/chatspage/chats_page.dart';
-import 'package:social_media_network/app/presentation/pages/additempage/add_item_page.dart';
-import 'package:social_media_network/app/presentation/pages/settingsPage/settings_page.dart';
+import 'package:found_lost_app/app/core/constants/app_colors.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/presentation/pages/categoriespage/categories_page.dart';
+import 'package:found_lost_app/app/presentation/pages/itemspage/items_page.dart';
+import 'package:found_lost_app/app/presentation/pages/homePage/logic/home_page_controller.dart';
+import 'package:found_lost_app/app/presentation/pages/homePage/widgets/bubble_items.dart';
+import 'package:found_lost_app/app/presentation/pages/chatspage/chats_page.dart';
+import 'package:found_lost_app/app/presentation/pages/additempage/add_item_page.dart';
+import 'package:found_lost_app/app/presentation/pages/settingsPage/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

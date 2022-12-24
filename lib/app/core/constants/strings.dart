@@ -24,7 +24,24 @@ const String ordersImage = "assets/images/cart.png";
 const String chatImg = "assets/images/chat.png";
 const String addItemImg = "assets/images/additem.png";
 const String itemsImg = "assets/images/items.png";
+const String foundImg = "assets/images/founditem.png";
+const String lostImg = "assets/images/lostitem.png";
+const String contactusImg = "assets/images/contactus.png";
+const String followusImg = "assets/images/followus.png";
+const String privacypolicyImg = "assets/images/privacypolicy.png";
+const String yamanicon = "assets/images/yemen.ico";
+const String mainLogo = "assets/images/main_logo.png";
 const String appFont = "Sofia Pro";
 const String mapKey = "key";
 const String mapValue = "value";
 const String userKey = "UserKey";
+  Map<String,dynamic> successRequest({dynamic responseBody}) {
+    return {
+      mapKey: "success", mapValue: responseBody,
+    };
+  }
+  Map<String,dynamic> failedRequest({dynamic responseBody}) {
+    return {
+      mapKey: "failed", mapValue: responseBody,
+    };
+  }

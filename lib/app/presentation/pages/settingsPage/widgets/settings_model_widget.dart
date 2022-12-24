@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
-import 'package:social_media_network/app/presentation/themes/theme_controller.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/presentation/themes/theme_controller.dart';
 
 class SettingHintBody extends StatelessWidget {
   final String hint;

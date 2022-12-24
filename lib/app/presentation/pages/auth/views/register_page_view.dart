@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/presentation/pages/auth/widgets/auth_logo_widget.dart';
-import 'package:social_media_network/app/presentation/pages/auth/widgets/register_form_fields_widget.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/widgets/auth_logo_widget.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/widgets/register_form_fields_widget.dart';
+import 'package:get/route_manager.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -15,6 +16,19 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_rounded,
+            color: Colors.black,
+          ),
+        ),
+        elevation: 0,
+      ),
       body: Container(
         height: ScreenHandler.getScreenHeight(context),
         width: ScreenHandler.getScreenWidth(context),
@@ -24,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: ScreenHandler.getScreenHeight(context) / 8),
+              SizedBox(height: ScreenHandler.getScreenHeight(context) / 13),
               const AuthLogoWidget(),
               const RegisterFormWidget(),
             ],

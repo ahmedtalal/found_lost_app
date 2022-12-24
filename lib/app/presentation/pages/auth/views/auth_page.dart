@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/auth_phone_number_page.dart';
 import 'package:get/route_manager.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/app_colors.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
-import 'package:social_media_network/app/presentation/pages/auth/views/login_page_view.dart';
-import 'package:social_media_network/app/presentation/pages/auth/views/register_page_view.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/custom_icon_btn_shared_widget.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/custom_text_shared_widget.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/app_colors.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/login_page_view.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/register_page_view.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/custom_icon_btn_shared_widget.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/custom_text_shared_widget.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -37,22 +38,18 @@ class AuthPage extends StatelessWidget {
                     SizedBox(
                         height: ScreenHandler.getScreenHeight(context) / 8),
                     const Center(
-                      child: CustomTextSharedWidget(
-                        textTitle: "Found App",
-                        titleStyle: TextStyle(
-                          fontSize: 40,
-                          fontFamily: appFont,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child:  Image(
+                        image: AssetImage(mainLogo),
+                        width: 80,
+                        height: 80,
                       ),
                     ),
                     SizedBox(
-                        height: ScreenHandler.getScreenHeight(context) / 10),
+                        height: ScreenHandler.getScreenHeight(context) / 20),
                     const CustomTextSharedWidget(
                       textTitle: "Create a",
                       titleStyle: TextStyle(
-                        fontSize: 35,
+                        fontSize: 30,
                         fontFamily: appFont,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -61,7 +58,7 @@ class AuthPage extends StatelessWidget {
                     const CustomTextSharedWidget(
                       textTitle: "New Account",
                       titleStyle: TextStyle(
-                        fontSize: 35,
+                        fontSize: 30,
                         fontFamily: appFont,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -92,7 +89,11 @@ class AuthPage extends StatelessWidget {
                     containerColor: Colors.white,
                     textColor: customColor8,
                     containerBorderColor: customColor8,
-                    onClick: () {},
+                    onClick: () {
+                      Get.to(
+                        () => const AuthPhoneNumberPage(),
+                      );
+                    },
                   ),
                   const SizedBox(height: 20),
                   TextBtnSharedWidget(

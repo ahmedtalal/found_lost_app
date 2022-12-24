@@ -2,14 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/app_colors.dart';
-import 'package:social_media_network/app/presentation/pages/auth/logic/getx/auth_controller.dart';
-import 'package:social_media_network/app/presentation/pages/auth/views/login_page_view.dart';
-import 'package:social_media_network/app/presentation/pages/auth/widgets/choice_auth_status_btn.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/text_form_field_shared_widget.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/text_link_shared_widget.dart';
-import '../../../shared/widgets/gender_shared_widget.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/widgets/choice_auth_status_btn.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/text_form_field_shared_widget.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/text_link_shared_widget.dart';
 
 class RegisterFormWidget extends StatelessWidget {
   const RegisterFormWidget({
@@ -76,8 +73,8 @@ class RegisterFormWidget extends StatelessWidget {
                   onValidateListenser: (String? value) {
                     return controller.validatePasswordField(value);
                   },
-                  prefIcon: Icons.phone,
-                  textType: TextInputType.number,
+                  prefIcon: Icons.lock,
+                  textType: TextInputType.visiblePassword,
                 ),
               ),
               const SizedBox(height: 13),
@@ -91,7 +88,7 @@ class RegisterFormWidget extends StatelessWidget {
                     controller.onChangePassword(newValue);
                   },
                   onValidateListenser: (String? value) {
-                    return controller.validatePasswordField(value);
+                    return controller.onValidateConfirmPassword();
                   },
                   prefIcon: Icons.lock,
                   textType: TextInputType.visiblePassword,

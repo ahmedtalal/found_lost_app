@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
 
 class HeaderSharedWidget extends StatelessWidget {
   final String title;
@@ -11,46 +11,19 @@ class HeaderSharedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: ScreenHandler.getScreenWidth(context),
-      height: ScreenHandler.getScreenHeight(context) / 10,
+      height: ScreenHandler.getScreenHeight(context) / 15,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontFamily: appFont,
-              fontWeight: FontWeight.w700,
-            ),
+          const Image(
+            image: AssetImage(mainLogo),
+            width: 40,
+            height: 40,
           ),
-          Row(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Icon(
-                  Icons.mode_night,
-                  size: 25,
-                ),
-              ),
-              const SizedBox(width: 15),
-              InkWell(
-                onTap: () {},
-                child: Icon(
-                  Icons.shopping_cart,
-                  size: 25,
-                ),
-              ),
-              const SizedBox(width: 15),
-              Image(
-                image: AssetImage(personImage),
-                width: 40,
-                height: 40,
-              ),
-            ],
-          )
+
         ],
       ),
     );

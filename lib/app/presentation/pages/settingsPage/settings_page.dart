@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
-import 'package:social_media_network/app/presentation/pages/auth/logic/getx/auth_controller.dart';
-import 'package:social_media_network/app/presentation/pages/auth/views/changepassword_page_view.dart';
-import 'package:social_media_network/app/presentation/pages/settingsPage/widgets/settings_model_widget.dart';
-import 'package:social_media_network/app/presentation/pages/userprofile/userprofile_page.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/changepassword_page_view.dart';
+import 'package:found_lost_app/app/presentation/pages/settingsPage/widgets/settings_model_widget.dart';
+import 'package:found_lost_app/app/presentation/pages/userprofile/userprofile_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -75,7 +75,7 @@ class SettingsPage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.to(
-                      () => UserProfilePage(),
+                      () => const UserProfilePage(),
                     );
                   },
                   child: const Icon(
@@ -85,18 +85,18 @@ class SettingsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: ScreenHandler.getScreenHeight(context) / 17),
+            SizedBox(height: ScreenHandler.getScreenHeight(context) / 30),
             const SettingHintBody(hint: "account"),
             SettingBodySections(
               title: "Found items",
-              image: editUserImage,
+              image: foundImg,
               color: Colors.teal,
               onClick: () {},
             ),
             const SizedBox(height: 10),
             SettingBodySections(
               title: "Lost items",
-              image: editUserImage,
+              image: lostImg,
               color: Colors.teal,
               onClick: () {},
             ),
@@ -107,6 +107,8 @@ class SettingsPage extends StatelessWidget {
               color: Colors.teal,
               onClick: () {},
             ),
+            SizedBox(height: ScreenHandler.getScreenHeight(context) / 80),
+            const SettingHintBody(hint: "mode"),
             SettingBodySections(
               title: "Dark Mode",
               image: darkModeImage,
@@ -121,7 +123,7 @@ class SettingsPage extends StatelessWidget {
               color: Colors.teal,
               onClick: () {
                 Get.to(
-                  () => UserProfilePage(),
+                  () => const UserProfilePage(),
                 );
               },
             ),
@@ -131,7 +133,7 @@ class SettingsPage extends StatelessWidget {
               image: changePasswordImage,
               color: Colors.purple,
               onClick: () {
-                Get.to(() => ChangePasswordPageView());
+                Get.to(() => const ChangePasswordPageView());
               },
             ),
             const SizedBox(height: 20),
@@ -150,10 +152,24 @@ class SettingsPage extends StatelessWidget {
               onClick: () {},
             ),
             const SizedBox(height: 20),
-            const SettingHintBody(hint: "Others"),
+            const SettingHintBody(hint: "follow us"),
             SettingBodySections(
-              title: "Orders",
-              image: ordersImage,
+              title: "privacy policy",
+              image: privacypolicyImg,
+              color: const Color.fromARGB(255, 47, 185, 152),
+              onClick: () {},
+            ),
+            const SizedBox(height: 10),
+            SettingBodySections(
+              title: "contact us",
+              image: contactusImg,
+              color: const Color.fromARGB(255, 47, 185, 152),
+              onClick: () {},
+            ),
+            const SizedBox(height: 10),
+            SettingBodySections(
+              title: "follow us",
+              image: followusImg,
               color: const Color.fromARGB(255, 47, 185, 152),
               onClick: () {},
             ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media_network/app/config/screen_handler.dart';
-import 'package:social_media_network/app/core/constants/app_colors.dart';
-import 'package:social_media_network/app/core/constants/strings.dart';
-import 'package:social_media_network/app/presentation/pages/auth/logic/getx/auth_controller.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
-import 'package:social_media_network/app/presentation/shared/widgets/text_form_field_shared_widget.dart';
+import 'package:found_lost_app/app/config/screen_handler.dart';
+import 'package:found_lost_app/app/core/constants/app_colors.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
+import 'package:found_lost_app/app/presentation/shared/widgets/text_form_field_shared_widget.dart';
 
 class ChangePasswordPageView extends StatelessWidget {
   const ChangePasswordPageView({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class ChangePasswordPageView extends StatelessWidget {
                           textType: TextInputType.visiblePassword,
                           prefIcon: Icons.lock,
                           onChangeListenser: (String? newValue) {
-                            controller.onChangeNewPassword(newValue);
+                            controller.onChangeConfirmPassword(newValue);
                           },
                           onValidateListenser: (String? value) {
                             return controller.validatePasswordField(value);

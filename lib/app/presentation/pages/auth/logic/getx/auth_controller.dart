@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:found_lost_app/app/core/constants/app_colors.dart';
+import 'package:found_lost_app/app/core/constants/strings.dart';
+import 'package:found_lost_app/app/data/repositories/global/firebase/fire_auth_repository_imp.dart';
+import 'package:found_lost_app/app/domain/entities/user_entity.dart';
+import 'package:found_lost_app/app/domain/usecases/auth/auth_usecase.dart';
+import 'package:found_lost_app/app/presentation/pages/homePage/home_page.dart';
+import 'package:found_lost_app/app/presentation/pages/splashscreen/splash_screen_page.dart';
+import 'package:found_lost_app/app/presentation/routes/app_routes.dart';
+import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  static AuthController _authController = AuthController._internal();
+  static final AuthController _authController = AuthController._internal();
   AuthController._internal();
   static AuthController get instance => _authController;
 
   String userName = '';
   String email = '';
   String password = '';
-  String newPassword = '';
+  String confirmPassword = '';
   String phone = '';
   bool isLoadingIcon = false;
 
@@ -20,6 +28,7 @@ class AuthController extends GetxController {
 
   onChangeEmail(String? value) {
     email = value!;
+    update();
   }
 
   onChangePassword(String? value) {
@@ -27,8 +36,8 @@ class AuthController extends GetxController {
     update();
   }
 
-  onChangeNewPassword(String? value) {
-    newPassword = value!;
+  onChangeConfirmPassword(String? value) {
+    confirmPassword = value!;
     update();
   }
 
@@ -78,11 +87,130 @@ class AuthController extends GetxController {
     }
   }
 
-  onClickLoginBtn(GlobalKey<FormState> key) {}
+  String? onValidateConfirmPassword() {
+    if (confirmPassword != password) {
+      return "password not matching";
+    } else {
+      return null;
+    }
+  }
 
-  onClickRegisterBtn(GlobalKey<FormState> key) {}
+  onClickLoginBtn(GlobalKey<FormState> key) async {
+    UserEntity userEntity = UserEntity(email: email, password: password);
+    if (key.currentState!.validate()) {
+      _loadingIcon(true);
+      final result = await LoginUseCases.instance
+          .call(userEntity, FireAuthRepositoryImp.instance);
+      if (result[mapKey].toString().toLowerCase() == "success") {
+        Get.off(() => const HomePage());
+        _loadingIcon(false);
+      } else {
+        _loadingIcon(false);
+        Get.snackbar(
+          "auth Exception",
+          result[mapValue],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: customColor6,
+          colorText: Colors.white,
+          borderRadius: 15,
+          margin: const EdgeInsets.all(5),
+          duration: const Duration(seconds: 4),
+          isDismissible: true,
+          forwardAnimationCurve: Curves.easeOutBack,
+          icon: const Icon(Icons.error),
+          messageText: Text(
+            result[mapValue].toString(),
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: appFont,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          titleText: const Text(
+            "auth Exception",
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: appFont,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      }
+    } else {
+      _loadingIcon(false);
+    }
+  }
 
-  onClickLogoutBtn() {}
+  onClickRegisterBtn(GlobalKey<FormState> key) async {
+    UserEntity userEntity = UserEntity(
+      userName: userName,
+      email: email,
+      password: password,
+      bioInfo: "",
+      phone: "",
+      address: "",
+      image: "",
+    );
+    if (key.currentState!.validate()) {
+      _loadingIcon(true);
+      final result = await RegisterUseCase.instance
+          .call(userEntity, FireAuthRepositoryImp.instance);
+      if (result[mapKey].toString().toLowerCase() == "success") {
+        Get.off(() => const HomePage());
+        _loadingIcon(false);
+      } else {
+        _loadingIcon(false);
+        Get.snackbar(
+          "auth Exception",
+          result[mapValue],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: customColor6,
+          colorText: Colors.white,
+          borderRadius: 15,
+          margin: const EdgeInsets.all(5),
+          duration: const Duration(seconds: 4),
+          isDismissible: true,
+          forwardAnimationCurve: Curves.easeOutBack,
+          icon: const Icon(Icons.error),
+          messageText: Text(
+            result[mapValue].toString(),
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: appFont,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          titleText: const Text(
+            "auth Exception",
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: appFont,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      }
+    } else {
+      _loadingIcon(false);
+    }
+  }
+
+  onClickLogoutBtn() {
+    _loadingIcon(false);
+    return LogOutUseCase.instance.call(FireAuthRepositoryImp.instance)
+        ? Get.offAll(() => const SplashScreenPage())
+        : null;
+  }
+
+  onClickUserIsLogin() {
+    return CheckIsAuthUseCase.instance.call(FireAuthRepositoryImp.instance)
+        ? AppRoutes.homeScreenRoute
+        : AppRoutes.splashScreenRoute;
+  }
 
   onClickChangePassword(GlobalKey<FormState> formKey) {}
 
