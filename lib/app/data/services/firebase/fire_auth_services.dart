@@ -62,9 +62,14 @@ class FireAuthServices {
     }
   }
 
-  Future<Map<String, dynamic>> fireUpdatePassword(var newPassword) async {
+  Future<Map<String, dynamic>> fireUpdatePassword(
+      var currentPassword, var newPassword) async {
     try {
-      await _auth.currentUser!.updatePassword(newPassword);
+      final user = _auth.currentUser;
+      final cred = EmailAuthProvider.credential(
+          email: user!.email!, password: currentPassword);
+      await user.reauthenticateWithCredential(cred);
+      await user.updatePassword(newPassword);
       return successRequest(responseBody: true);
     } on FirebaseAuthException catch (e) {
       return failedRequest(responseBody: e.code);

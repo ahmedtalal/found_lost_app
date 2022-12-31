@@ -19,12 +19,12 @@ class CustomIconBtnSharedWidget extends StatelessWidget {
     return InkWell(
       onTap: onClick!,
       child: Container(
-        width: ScreenHandler.getScreenWidth(context) / 1.15,
+        width: ScreenHandler.getScreenWidth(context) / 1.30,
         height: ScreenHandler.getScreenHeight(context) / 13,
         padding: const EdgeInsets.all(8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: containerBorderColor!, width: 1.5),
           color: containerColor,
         ),
@@ -43,7 +43,7 @@ class CustomIconBtnSharedWidget extends StatelessWidget {
                 color: textColor,
                 fontFamily: appFont,
                 fontWeight: FontWeight.w600,
-                fontSize: 21,
+                fontSize: 18,
               ),
             ),
           ],

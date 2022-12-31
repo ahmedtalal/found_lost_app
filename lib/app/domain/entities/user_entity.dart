@@ -1,13 +1,6 @@
 class UserEntity {
-  final String? userId,
-      userName,
-      bioInfo,
-      address,
-      email,
-      password,
-      phone,
-      image;
-  const UserEntity({
+  String? userId, userName, bioInfo, address, email, password, phone, image;
+  UserEntity({
     this.userId,
     this.userName,
     this.bioInfo,

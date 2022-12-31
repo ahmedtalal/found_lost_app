@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/login_page_view.dart';
 import 'package:get/get.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
 import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
@@ -85,7 +86,7 @@ class RegisterFormWidget extends StatelessWidget {
                   initialValue: "",
                   label: "Confirm Password",
                   onChangeListenser: (String? newValue) {
-                    controller.onChangePassword(newValue);
+                    controller.onChangeConfirmPassword(newValue);
                   },
                   onValidateListenser: (String? value) {
                     return controller.onValidateConfirmPassword();
@@ -94,7 +95,7 @@ class RegisterFormWidget extends StatelessWidget {
                   textType: TextInputType.visiblePassword,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 25),
               ChoiceAuthStatusBtn(
                 controller: controller,
                 title: "Register",
@@ -108,7 +109,7 @@ class RegisterFormWidget extends StatelessWidget {
                 title: "Do your have an account ?",
                 authTitle: "Login",
                 onClick: () {
-                  Get.back();
+                  Get.off(() => const LoginPage());
                 },
               ),
             ],

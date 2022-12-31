@@ -31,17 +31,22 @@ const String followusImg = "assets/images/followus.png";
 const String privacypolicyImg = "assets/images/privacypolicy.png";
 const String yamanicon = "assets/images/yemen.ico";
 const String mainLogo = "assets/images/main_logo.png";
+const String emptyData = "assets/images/emptysearch.png";
+const String emptyItems = "assets/images/emptyData.jpg";
 const String appFont = "Sofia Pro";
 const String mapKey = "key";
 const String mapValue = "value";
 const String userKey = "UserKey";
-  Map<String,dynamic> successRequest({dynamic responseBody}) {
-    return {
-      mapKey: "success", mapValue: responseBody,
-    };
-  }
-  Map<String,dynamic> failedRequest({dynamic responseBody}) {
-    return {
-      mapKey: "failed", mapValue: responseBody,
-    };
-  }
+Map<String, dynamic> successRequest({dynamic responseBody}) {
+  return {
+    mapKey: "success",
+    mapValue: responseBody,
+  };
+}
+
+Map<String, dynamic> failedRequest({dynamic responseBody}) {
+  return {
+    mapKey: "failed",
+    mapValue: responseBody,
+  };
+}

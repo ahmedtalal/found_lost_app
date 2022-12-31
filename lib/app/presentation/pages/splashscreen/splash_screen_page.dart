@@ -49,7 +49,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                   CustomTextSharedWidget(
                     textTitle: "Report Losses",
                     titleStyle: TextStyle(
-                      fontSize: 30,
+                      fontSize: 20,
                       fontFamily: appFont,
                       color: Colors.white,
                     ),
@@ -57,7 +57,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                   CustomTextSharedWidget(
                     textTitle: "With goal a driven approach",
                     titleStyle: TextStyle(
-                      fontSize: 25,
+                      fontSize: 17,
                       fontFamily: appFont,
                       color: Colors.white,
                     ),

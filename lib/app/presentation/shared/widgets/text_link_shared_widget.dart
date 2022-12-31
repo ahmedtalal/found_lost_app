@@ -20,7 +20,7 @@ class TextLinkSharedWidget extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            fontSize: 15,
+            fontSize: 12,
             fontFamily: appFont,
             fontWeight: FontWeight.w500,
           ),
@@ -31,7 +31,7 @@ class TextLinkSharedWidget extends StatelessWidget {
           child: Text(
             authTitle,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 15,
               fontFamily: appFont,
               fontWeight: FontWeight.w600,
               color: customeColor3,

@@ -16,7 +16,7 @@ class AuthLogoWidget extends StatelessWidget {
           const Text(
             "Hello \nThere",
             style: TextStyle(
-              fontSize: 60,
+              fontSize: 40,
               fontWeight: FontWeight.bold,
               height: 0.9,
               color: Colors.black,

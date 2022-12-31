@@ -20,12 +20,12 @@ class TextBtnSharedWidget extends StatelessWidget {
     return InkWell(
       onTap: onClick!,
       child: Container(
-        width: ScreenHandler.getScreenWidth(context) / 1.15,
-        height: ScreenHandler.getScreenHeight(context) / 14,
+        width: ScreenHandler.getScreenWidth(context) / 1.35,
+        height: ScreenHandler.getScreenHeight(context) / 15,
         padding: const EdgeInsets.all(8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: containerBorderColor!, width: 1.5),
           color: containerColor,
         ),
@@ -35,7 +35,7 @@ class TextBtnSharedWidget extends StatelessWidget {
             color: textColor,
             fontFamily: appFont,
             fontWeight: FontWeight.w600,
-            fontSize: 21,
+            fontSize: 15,
           ),
         ),
       ),

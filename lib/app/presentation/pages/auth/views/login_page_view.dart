@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: ScreenHandler.getScreenHeight(context) / 13),
+              SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
               const AuthLogoWidget(),
               const LoginFormWidget(),
             ],

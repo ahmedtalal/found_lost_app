@@ -21,7 +21,7 @@ class SettingHintBody extends StatelessWidget {
       child: Text(
         hint,
         style: const TextStyle(
-          fontSize: 12,
+          fontSize: 10,
           fontFamily: appFont,
           color: Colors.grey,
           fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class SettingBodySections extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontFamily: appFont,
-                  fontSize: title.toLowerCase() == "logout" ? 19 : 16,
+                  fontSize: title.toLowerCase() == "logout" ? 14 : 13,
                   fontWeight: title.toLowerCase() == "logout"
                       ? FontWeight.w800
                       : FontWeight.w600,

@@ -37,3 +37,14 @@ class CheckIsAuthUseCase {
 
   bool call(IAuthRepository iAuthRepository) => iAuthRepository.checkIsAuth();
 }
+
+class UpdatePasswordUseCase {
+  static final UpdatePasswordUseCase _updatePasswordUseCase =
+      UpdatePasswordUseCase._internal();
+  UpdatePasswordUseCase._internal();
+  static UpdatePasswordUseCase get instance => _updatePasswordUseCase;
+
+  Future<Map<String, dynamic>> call(var currentPassword, var newPassword,
+          IAuthRepository iAuthRepository) async =>
+      await iAuthRepository.updatePassword(currentPassword, newPassword);
+}

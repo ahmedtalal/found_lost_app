@@ -30,7 +30,7 @@ class TextFormFieldSharedWidget extends StatelessWidget {
           keyboardType: textType,
           style: const TextStyle(
             fontFamily: appFont,
-            fontSize: 18,
+            fontSize: 14,
           ),
           decoration: InputDecoration(
             border: textFieldBorder(),
@@ -88,7 +88,7 @@ class TextFormFieldSharedWidget extends StatelessWidget {
 
 OutlineInputBorder textFieldBorder() {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(25),
+    borderRadius: BorderRadius.circular(13),
     borderSide: const BorderSide(
       color: Colors.grey,
       width: 0.8,

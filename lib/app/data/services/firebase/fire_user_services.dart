@@ -1,8 +1,11 @@
 // ignore_for_file: avoid_print
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
 import 'package:found_lost_app/app/domain/entities/user_entity.dart';
 import 'package:found_lost_app/app/data/models/user_model.dart';
+import 'package:path/path.dart';
+
 
 class FireUserServices {
   static final FireUserServices _fireUserServices =
@@ -69,6 +72,25 @@ class FireUserServices {
       return successRequest(responseBody: users);
     } catch (e) {
       print('the get all users error is :${e.toString()}');
+      return failedRequest(responseBody: e.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> fireUploadUserImage(var image) async {
+    try {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      String fileName = basename(image.path);
+      Reference reference = storage.ref().child("usersImage/$fileName");
+
+      //Upload the file to firebase
+      await reference.putFile(image);
+
+      //  StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+
+      // Waits till the file is uploaded then stores the download url
+      String url = await reference.getDownloadURL();
+      return successRequest(responseBody: url);
+    } catch (e) {
       return failedRequest(responseBody: e.toString());
     }
   }

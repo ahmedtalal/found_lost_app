@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:found_lost_app/app/core/constants/app_colors.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
-import 'package:found_lost_app/app/data/repositories/global/firebase/fire_auth_repository_imp.dart';
+import 'package:found_lost_app/app/data/repositories/firebase/fire_auth_repository_imp.dart';
 import 'package:found_lost_app/app/domain/entities/user_entity.dart';
-import 'package:found_lost_app/app/domain/usecases/auth/auth_usecase.dart';
+import 'package:found_lost_app/app/domain/usecases/auth/auth_usecases.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/register_page_view.dart';
 import 'package:found_lost_app/app/presentation/pages/homePage/home_page.dart';
 import 'package:found_lost_app/app/presentation/pages/splashscreen/splash_screen_page.dart';
 import 'package:found_lost_app/app/presentation/routes/app_routes.dart';
@@ -148,10 +150,10 @@ class AuthController extends GetxController {
       userName: userName,
       email: email,
       password: password,
-      bioInfo: "",
-      phone: "",
-      address: "",
-      image: "",
+      bioInfo: " ",
+      phone: " ",
+      address: " ",
+      image: " ",
     );
     if (key.currentState!.validate()) {
       _loadingIcon(true);
@@ -212,7 +214,53 @@ class AuthController extends GetxController {
         : AppRoutes.splashScreenRoute;
   }
 
-  onClickChangePassword(GlobalKey<FormState> formKey) {}
+  onClickChangePassword(GlobalKey<FormState> formKey) async {
+    if (formKey.currentState!.validate()) {
+      _loadingIcon(true);
+      final result = await UpdatePasswordUseCase.instance
+          .call(password, confirmPassword, FireAuthRepositoryImp.instance);
+      if (result[mapKey].toString().toLowerCase() == "success") {
+        await FirebaseAuth.instance.signOut();
+        Get.offAll(() => const RegisterPage());
+        _loadingIcon(false);
+      } else {
+        _loadingIcon(false);
+        return Get.snackbar(
+          "auth Exception",
+          result[mapValue],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: customColor6,
+          colorText: Colors.white,
+          borderRadius: 15,
+          margin: const EdgeInsets.all(5),
+          duration: const Duration(seconds: 4),
+          isDismissible: true,
+          forwardAnimationCurve: Curves.easeOutBack,
+          icon: const Icon(Icons.error),
+          messageText: Text(
+            result[mapValue].toString(),
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: appFont,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          titleText: const Text(
+            "auth Exception",
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: appFont,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      }
+    } else {
+      _loadingIcon(false);
+    }
+  }
 
   // this is private method for class
   _loadingIcon(bool value) {
