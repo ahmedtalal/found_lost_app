@@ -38,7 +38,7 @@ class AuthPage extends StatelessWidget {
                     SizedBox(
                         height: ScreenHandler.getScreenHeight(context) / 8),
                     const Center(
-                      child:  Image(
+                      child: Image(
                         image: AssetImage(mainLogo),
                         width: 80,
                         height: 80,
@@ -49,7 +49,7 @@ class AuthPage extends StatelessWidget {
                     const CustomTextSharedWidget(
                       textTitle: "Create a",
                       titleStyle: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20,
                         fontFamily: appFont,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class AuthPage extends StatelessWidget {
                     const CustomTextSharedWidget(
                       textTitle: "New Account",
                       titleStyle: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20,
                         fontFamily: appFont,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class AuthPage extends StatelessWidget {
                   const CustomTextSharedWidget(
                     textTitle: "Sign Up With",
                     titleStyle: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontFamily: appFont,
                       color: customColor7,
                       fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class AuthPage extends StatelessWidget {
                   const CustomTextSharedWidget(
                     textTitle: "OR",
                     titleStyle: TextStyle(
-                      fontSize: 20,
+                      fontSize: 17,
                       fontFamily: appFont,
                       color: Colors.black,
                     ),

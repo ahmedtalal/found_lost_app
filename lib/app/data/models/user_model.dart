@@ -2,7 +2,7 @@ import 'package:found_lost_app/app/domain/entities/user_entity.dart';
 import 'package:uuid/uuid.dart';
 
 class UserModel extends UserEntity {
-  const UserModel({
+  UserModel({
     super.userId,
     super.userName,
     super.bioInfo,
@@ -15,7 +15,6 @@ class UserModel extends UserEntity {
 
   factory UserModel.fromJson(Map<String, dynamic> data) {
     return UserModel(
-      userId: data["userId"],
       userName: data["userName"],
       email: data["email"],
       phone: data["phoneNumber"],

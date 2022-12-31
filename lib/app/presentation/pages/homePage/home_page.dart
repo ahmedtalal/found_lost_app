@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:found_lost_app/app/core/constants/app_colors.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
 import 'package:found_lost_app/app/presentation/pages/categoriespage/categories_page.dart';
-import 'package:found_lost_app/app/presentation/pages/itemspage/items_page.dart';
+import 'package:found_lost_app/app/presentation/pages/itemspage/views/items_page.dart';
 import 'package:found_lost_app/app/presentation/pages/homePage/logic/home_page_controller.dart';
 import 'package:found_lost_app/app/presentation/pages/homePage/widgets/bubble_items.dart';
 import 'package:found_lost_app/app/presentation/pages/chatspage/chats_page.dart';
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 iamge: addItemImg,
               ),
               bubbleItems(
-                title: "items",
+                title: "my items",
                 backgroundColor: customeColor4,
                 iamge: itemsImg,
               ),

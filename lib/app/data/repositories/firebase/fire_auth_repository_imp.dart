@@ -36,8 +36,9 @@ class FireAuthRepositoryImp extends IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> updatePassword(newPassword) {
-    // TODO: implement updatePassword
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> updatePassword(
+      currentPassword, newPassword) async {
+    return await FireAuthServices.instance
+        .fireUpdatePassword(currentPassword, newPassword);
   }
 }

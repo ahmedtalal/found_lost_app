@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/views/register_page_view.dart';
 import 'package:get/get.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
 import 'package:found_lost_app/app/core/constants/app_colors.dart';
@@ -69,7 +70,7 @@ class LoginFormWidget extends StatelessWidget {
                     child: const Text(
                       "ForgetPassword",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 12,
                         fontFamily: appFont,
                         fontWeight: FontWeight.w600,
                       ),
@@ -90,7 +91,7 @@ class LoginFormWidget extends StatelessWidget {
                   title: "Do not have an account ?",
                   authTitle: "Register",
                   onClick: () {
-                    Get.back();
+                    Get.off(() => const RegisterPage());
                   },
                 ),
                 const SizedBox(height: 15),
@@ -99,7 +100,7 @@ class LoginFormWidget extends StatelessWidget {
                   child: const Text(
                     "OR",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       fontFamily: appFont,
                       fontWeight: FontWeight.w500,
                       color: customColor8,

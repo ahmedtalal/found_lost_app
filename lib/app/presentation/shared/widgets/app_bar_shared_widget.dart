@@ -23,7 +23,7 @@ class AppBarSharedWidget {
       title: const Text(
         "Found App",
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 15,
           fontFamily: appFont,
         ),
       ),

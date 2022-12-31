@@ -1,3 +1,8 @@
+import 'package:found_lost_app/app/presentation/pages/additempage/add_item_page.dart';
+import 'package:found_lost_app/app/presentation/pages/categoriespage/categories_page.dart';
+import 'package:found_lost_app/app/presentation/pages/categoriespage/logic/getx/categories_binding.dart';
+import 'package:found_lost_app/app/presentation/pages/itemspage/logic/getx/items_binding.dart';
+import 'package:found_lost_app/app/presentation/pages/itemspage/views/items_page.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_binding.dart';
 import 'package:found_lost_app/app/presentation/pages/auth/views/login_page_view.dart';
@@ -8,6 +13,7 @@ import 'package:found_lost_app/app/presentation/pages/splashscreen/splash_screen
 import 'package:found_lost_app/app/presentation/pages/userprofile/userprofile_page.dart';
 import 'package:found_lost_app/app/presentation/routes/app_routes.dart';
 import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/userprofile_binding.dart';
+import 'package:found_lost_app/app/presentation/pages/additempage/logic/getx/add_item_report_binding.dart';
 
 class AppPages {
   static List<GetPage> pages = [
@@ -35,5 +41,20 @@ class AppPages {
       page: () => const UserProfilePage(),
       binding: UserProfileBinding(),
     ),
+    GetPage(
+      name: AppRoutes.addItemReportRoute,
+      page: () => const AddItemPage(),
+      binding: AddItemReportBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.itemsReportRoute,
+      page: () => const ItemsPage(),
+      binding: ItemsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.categoriesRoute,
+      page: () => const CategoriesPage(),
+      binding: CategoriesBinding(),
+    )
   ];
 }

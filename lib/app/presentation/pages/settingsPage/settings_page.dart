@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:found_lost_app/app/presentation/pages/itemspage/views/item_type_page.dart';
+import 'package:found_lost_app/app/presentation/pages/itemspage/views/items_page.dart';
+import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/userprofile_controller.dart';
 import 'package:get/get.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
@@ -6,6 +10,8 @@ import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_contr
 import 'package:found_lost_app/app/presentation/pages/auth/views/changepassword_page_view.dart';
 import 'package:found_lost_app/app/presentation/pages/settingsPage/widgets/settings_model_widget.dart';
 import 'package:found_lost_app/app/presentation/pages/userprofile/userprofile_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -24,66 +30,81 @@ class SettingsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
+            GetX<UserProfileController>(
+              init: UserProfileController.instance,
+              builder: (controller) {
+                if (controller.isLoading.value) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.red, width: 2.5),
-                      ),
-                      child: const Image(
-                        fit: BoxFit.cover,
-                        image: AssetImage(userImage),
-                        height: 35,
-                        width: 35,
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Ahmed Talal",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: appFont,
-                            fontWeight: FontWeight.bold,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.red, width: 2.5),
+                          ),
+                          child:  CachedNetworkImage(
+                            height: 35,
+                            width: 35,
+                            fit: BoxFit.cover,
+                            imageUrl: controller.userProfileImage.value,
+                            placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) => const Image(
+                              image: AssetImage(userImage),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Edit Personal Details",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: appFont,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.grey,
-                          ),
+                        const SizedBox(width: 15),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              controller.userName.value,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: appFont,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              "Edit Personal Details",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: appFont,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => const UserProfilePage(),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.chevron_right_rounded,
+                        size: 32,
+                      ),
+                    ),
                   ],
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(
-                      () => const UserProfilePage(),
-                    );
-                  },
-                  child: const Icon(
-                    Icons.chevron_right_rounded,
-                    size: 32,
-                  ),
-                ),
-              ],
+                );
+              },
             ),
             SizedBox(height: ScreenHandler.getScreenHeight(context) / 30),
             const SettingHintBody(hint: "account"),
@@ -91,21 +112,27 @@ class SettingsPage extends StatelessWidget {
               title: "Found items",
               image: foundImg,
               color: Colors.teal,
-              onClick: () {},
+              onClick: () {
+                Get.to(() => const ItemTypepage(itemReportType: "found"));
+              },
             ),
             const SizedBox(height: 10),
             SettingBodySections(
               title: "Lost items",
               image: lostImg,
               color: Colors.teal,
-              onClick: () {},
+              onClick: () {
+                Get.to(() => const ItemTypepage(itemReportType: "lost"));
+              },
             ),
             const SizedBox(height: 10),
             SettingBodySections(
               title: "My items",
               image: editUserImage,
               color: Colors.teal,
-              onClick: () {},
+              onClick: () {
+                Get.to(() => const ItemsPage());
+              },
             ),
             SizedBox(height: ScreenHandler.getScreenHeight(context) / 80),
             const SettingHintBody(hint: "mode"),

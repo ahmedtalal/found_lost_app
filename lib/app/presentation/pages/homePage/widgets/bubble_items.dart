@@ -12,19 +12,19 @@ BubbleBottomBarItem bubbleItems({
       title,
       style: const TextStyle(
         fontFamily: appFont,
-        fontSize: 13.0,
+        fontSize: 8.0,
         color: Colors.white,
       ),
     ),
     backgroundColor: backgroundColor,
     icon: Image.asset(
       iamge,
-      height: 20.0,
+      height: 18.0,
       color: title.toLowerCase() == "additem" ? null : Colors.black,
     ),
     activeIcon: Image.asset(
       iamge,
-      height: 20.0,
+      height: 18.0,
       color: title.toLowerCase() == "additem" ? null : Colors.white,
     ),
   );

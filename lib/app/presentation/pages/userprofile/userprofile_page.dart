@@ -5,8 +5,9 @@ import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_contr
 import 'package:found_lost_app/app/presentation/pages/auth/widgets/choice_auth_status_btn.dart';
 import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/userprofile_controller.dart';
 import 'package:found_lost_app/app/presentation/shared/widgets/text_form_field_shared_widget.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -28,9 +29,14 @@ class UserProfilePage extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: GetBuilder<UserProfileController>(
+      body: GetX<UserProfileController>(
         init: UserProfileController.instance,
         builder: (controller) {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Container(
             height: double.maxFinite,
             width: double.maxFinite,
@@ -51,18 +57,25 @@ class UserProfilePage extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.red, width: 3.5),
                         ),
-                        child: const Image(
-                          fit: BoxFit.cover,
-                          image: AssetImage(userImage),
+                        child: CachedNetworkImage(
                           height: 50,
                           width: 50,
+                          fit: BoxFit.cover,
+                          imageUrl: controller.userProfileImage.value,
+                          placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) => const Image(
+                            image: AssetImage(userImage),
+                          ),
                         ),
                       ),
                       Positioned(
                         bottom: -8,
                         left: -12,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.onClickImagePicker();
+                          },
                           icon: const Icon(
                             Icons.photo_camera_sharp,
                             size: 30.0,
@@ -84,7 +97,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "app coder",
-                              initialValue: "",
+                              initialValue: controller.userName.value,
                               label: "UserName",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangeUserName(newValue);
@@ -102,7 +115,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "example@gmail.com",
-                              initialValue: "",
+                              initialValue: controller.email.value,
                               label: "Email",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangeEmail(newValue);
@@ -120,7 +133,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "Enter your phone number",
-                              initialValue: "",
+                              initialValue: controller.phone.value,
                               label: "phone number",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangePhone(newValue);
@@ -133,12 +146,50 @@ class UserProfilePage extends StatelessWidget {
                               textType: TextInputType.number,
                             ),
                           ),
-                          const SizedBox(height: 50),
+                          const SizedBox(height: 13),
+                          SizedBox(
+                            height: ScreenHandler.getScreenHeight(context) / 13,
+                            child: TextFormFieldSharedWidget(
+                              hint: "your address",
+                              initialValue: controller.address.value,
+                              label: "address",
+                              onChangeListenser: (String? newValue) {
+                                controller.onChangeAdress(newValue);
+                              },
+                              onValidateListenser: (String? value) {
+                                return controller
+                                    .onValidateEditTextField(value!);
+                              },
+                              prefIcon: Icons.location_city,
+                              textType: TextInputType.streetAddress,
+                            ),
+                          ),
+                          const SizedBox(height: 13),
+                          SizedBox(
+                            height: ScreenHandler.getScreenHeight(context) / 13,
+                            child: TextFormFieldSharedWidget(
+                              hint: "bio info",
+                              initialValue: controller.bioInfo.value,
+                              label: "bioinfo",
+                              onChangeListenser: (String? newValue) {
+                                controller.onChangeBioInfo(newValue);
+                              },
+                              onValidateListenser: (String? value) {
+                                return controller
+                                    .onValidateEditTextField(value!);
+                              },
+                              prefIcon: Icons.info,
+                              textType: TextInputType.text,
+                            ),
+                          ),
+                          const SizedBox(height: 25),
                           ChoiceAuthStatusBtn(
                             controller: AuthController.instance,
                             title: "Save Changes",
                             formKey: formKey,
-                            onClick: () {},
+                            onClick: () {
+                              controller.onClickUpdateUserInfo(formKey);
+                            },
                           ),
                         ],
                       )),

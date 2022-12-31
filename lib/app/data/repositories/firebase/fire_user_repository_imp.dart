@@ -26,9 +26,8 @@ class FireUserRepositoryImp implements IUserRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> displaySpecialUser(index) {
-    // TODO: implement displaySpecialUser
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> displaySpecialUser(index) async {
+    return await FireUserServices.instance.fireGetSpecialUser(index);
   }
 
   @override
@@ -38,8 +37,12 @@ class FireUserRepositoryImp implements IUserRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> updateUser(UserEntity model) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> updateUser(UserEntity model) async{
+   return await FireUserServices.instance.fireUpdateUserInfo(model);
+  }
+
+  @override
+  Future<Map<String, dynamic>> uploadUserImage(imageFile) async{
+    return await FireUserServices.instance.fireUploadUserImage(imageFile);
   }
 }

@@ -33,13 +33,13 @@ class ChangePasswordPageView extends StatelessWidget {
                         onTap: () {
                           Get.back();
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_back,
                           size: 20,
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Text(
+                      const Text(
                         "Change Password",
                         style: TextStyle(
                           fontFamily: appFont,

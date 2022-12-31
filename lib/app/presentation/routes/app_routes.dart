@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-
 class AppRoutes {
-  static final String splashScreenRoute = "/SplashScreen";
-  static final String loginScreenRoute = "/LoginScreen";
-  static final String registerScreenRoute = "/RegisterScreen";
-  static final String homeScreenRoute = "/HomeScreen";
-  static final String userProfileRoute = "/UserProfileScreen";
-
+  static const String splashScreenRoute = "/SplashScreen";
+  static const String loginScreenRoute = "/LoginScreen";
+  static const String registerScreenRoute = "/RegisterScreen";
+  static const String homeScreenRoute = "/HomeScreen";
+  static const String userProfileRoute = "/UserProfileScreen";
+  static const String addItemReportRoute = "/AddItemReportPage";
+  static const String itemsReportRoute = "/ItemsReportPage";
+  static const String categoriesRoute = "/categoriesPage";
 }
