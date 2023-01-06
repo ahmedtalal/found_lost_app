@@ -1,13 +1,15 @@
-import 'package:get/get_state_manager/get_state_manager.dart';
+
+import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
   static HomePageController _homePageController = HomePageController._internal();
   HomePageController._internal();
   static HomePageController get instance => _homePageController;
-  int currentIndex = 0;
+  var currentIndex = 0.obs;
 
   switchPages(int? index) {
-    currentIndex = index!;
+    currentIndex.value = index!;
     update();
   }
+
 }

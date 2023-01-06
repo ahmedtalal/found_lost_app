@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
@@ -7,7 +8,6 @@ import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/use
 import 'package:found_lost_app/app/presentation/shared/widgets/text_form_field_shared_widget.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -31,6 +31,10 @@ class UserProfilePage extends StatelessWidget {
       ),
       body: GetX<UserProfileController>(
         init: UserProfileController.instance,
+        initState: (state) {
+          state.controller!.getSpecialUserProfileState(
+              FirebaseAuth.instance.currentUser!.uid);
+        },
         builder: (controller) {
           if (controller.isLoading.value) {
             return const Center(
@@ -61,9 +65,9 @@ class UserProfilePage extends StatelessWidget {
                           height: 50,
                           width: 50,
                           fit: BoxFit.cover,
-                          imageUrl: controller.userProfileImage.value,
+                          imageUrl: controller.userModel.value.image!,
                           placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
+                              const Center(child: CircularProgressIndicator()),
                           errorWidget: (context, url, error) => const Image(
                             image: AssetImage(userImage),
                           ),
@@ -97,7 +101,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "app coder",
-                              initialValue: controller.userName.value,
+                              initialValue: controller.userModel.value.userName!,
                               label: "UserName",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangeUserName(newValue);
@@ -115,7 +119,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "example@gmail.com",
-                              initialValue: controller.email.value,
+                              initialValue: controller.userModel.value.email!,
                               label: "Email",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangeEmail(newValue);
@@ -133,7 +137,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "Enter your phone number",
-                              initialValue: controller.phone.value,
+                              initialValue: controller.userModel.value.phone!,
                               label: "phone number",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangePhone(newValue);
@@ -151,7 +155,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "your address",
-                              initialValue: controller.address.value,
+                              initialValue: controller.userModel.value.address!,
                               label: "address",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangeAdress(newValue);
@@ -169,7 +173,7 @@ class UserProfilePage extends StatelessWidget {
                             height: ScreenHandler.getScreenHeight(context) / 13,
                             child: TextFormFieldSharedWidget(
                               hint: "bio info",
-                              initialValue: controller.bioInfo.value,
+                              initialValue: controller.userModel.value.bioInfo!,
                               label: "bioinfo",
                               onChangeListenser: (String? newValue) {
                                 controller.onChangeBioInfo(newValue);

@@ -11,21 +11,21 @@ class ItemsController extends GetxController {
   static final ItemsController _itemsController = ItemsController._internal();
   ItemsController._internal();
   static ItemsController get instance => _itemsController;
-  var itemReportslist = <ItemReportModel>[].obs;
-  var lostItemReportslist = <ItemReportModel>[].obs;
-  var foundItemReportslist = <ItemReportModel>[].obs;
+  var itemReportsList = <ItemReportModel>[].obs;
+  var lostItemReportsList = <ItemReportModel>[].obs;
+  var foundItemReportsList = <ItemReportModel>[].obs;
 
-  var isLoadding = true.obs;
+  var isLoading = true.obs;
 
   getAllItemReportsByUserId() async {
     try {
-      isLoadding(true);
+      isLoading(true);
       final result = await GetAllItemReportsUseCase.instance
           .call(FireItemReportRepositoryItem.instance);
       if (result[mapKey].toString().toLowerCase() == "success") {
         filterItemReports(items: result[mapValue]);
       } else {
-        isLoadding(false);
+        isLoading(false);
         return Get.snackbar(
           "item reports Exception",
           result[mapValue],
@@ -59,29 +59,34 @@ class ItemsController extends GetxController {
         );
       }
     } finally {
-      isLoadding(false);
+      isLoading(false);
     }
   }
 
   void filterItemReports({required List<ItemReportModel> items}) {
+    itemReportsList.clear();
+    foundItemReportsList.clear();
+    lostItemReportsList.clear();
     String userId = FirebaseAuth.instance.currentUser!.uid;
     for (ItemReportModel itemReport in items) {
       if (itemReport.userId == userId) {
-        itemReportslist.add(itemReport);
+        itemReportsList.add(itemReport);
       }
       if (itemReport.reporttype!.toLowerCase() == "found" &&
           itemReport.userId == userId) {
-        foundItemReportslist.add(itemReport);
+        foundItemReportsList.add(itemReport);
       } else if (itemReport.reporttype!.toLowerCase() == "lost" &&
           itemReport.userId == userId) {
-        lostItemReportslist.add(itemReport);
+        lostItemReportsList.add(itemReport);
       }
     }
   }
+  //
+  // @override
+  // void onInit() async{
+  //   await getAllItemReportsByUserId();
+  //   super.onInit();
+  // }
 
-  @override
-  void onInit() {
-    getAllItemReportsByUserId();
-    super.onInit();
-  }
+
 }

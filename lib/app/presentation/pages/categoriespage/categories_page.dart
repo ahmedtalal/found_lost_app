@@ -96,6 +96,7 @@ class _CategoriesPageState extends State<CategoriesPage>
                   ),
                 ),
               ),
+              const SizedBox(height: 15),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.only(left: 20),
@@ -106,69 +107,73 @@ class _CategoriesPageState extends State<CategoriesPage>
                     children: [
                       GetX<CategoriesController>(
                           init: CategoriesController.instance,
+                          initState: (state) {
+                            state.controller!.getAllItemReports();
+                          },
                           builder: (controller) {
-                            if (controller.isLoadding.value) {
+                            if (controller.isLoading.value) {
                               return Center(
                                 child: CircularProgressIndicator(),
                               );
-                            } else if (controller.itemReportslist.isEmpty) {
+                            } else if (controller.itemReportsList.isEmpty) {
                               return EmptyItemReportsWidget();
                             }
-                            return Expanded(
-                              child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: controller.itemReportslist.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ItemTypeView(
-                                      itemReportModel:
-                                          controller.itemReportslist[index]);
-                                },
-                              ),
+                            return ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: controller.itemReportsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ItemReportView(
+                                  itemReportModel:
+                                      controller.itemReportsList[index],
+                                );
+                              },
                             );
                           }),
                       GetX<CategoriesController>(
                           init: CategoriesController.instance,
+                          initState: (state) {
+                            state.controller!.getAllItemReports();
+                          },
                           builder: (controller) {
-                            if (controller.isLoadding.value) {
+                            if (controller.isLoading.value) {
                               return Center(
                                 child: CircularProgressIndicator(),
                               );
                             } else if (controller
-                                .foundItemReportslist.isEmpty) {
+                                .foundItemReportsList.isEmpty) {
                               return EmptyItemReportsWidget();
                             }
-                            return Expanded(
-                              child: ListView.builder(
-                                itemCount:
-                                    controller.foundItemReportslist.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ItemTypeView(
-                                      itemReportModel: controller
-                                          .foundItemReportslist[index]);
-                                },
-                              ),
+                            return ListView.builder(
+                              itemCount: controller.foundItemReportsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ItemReportView(
+                                  itemReportModel:
+                                      controller.foundItemReportsList[index],
+                                );
+                              },
                             );
                           }),
                       GetX<CategoriesController>(
                           init: CategoriesController.instance,
+                          initState: (state) {
+                            state.controller!.getAllItemReports();
+                          },
                           builder: (controller) {
-                            if (controller.isLoadding.value) {
+                            if (controller.isLoading.value) {
                               return Center(
                                 child: CircularProgressIndicator(),
                               );
-                            } else if (controller.lostItemReportslist.isEmpty) {
+                            } else if (controller.lostItemReportsList.isEmpty) {
                               return EmptyItemReportsWidget();
                             }
-                            return Expanded(
-                              child: ListView.builder(
-                                itemCount:
-                                    controller.lostItemReportslist.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ItemTypeView(
-                                      itemReportModel: controller
-                                          .lostItemReportslist[index]);
-                                },
-                              ),
+                            return ListView.builder(
+                              itemCount: controller.lostItemReportsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ItemReportView(
+                                  itemReportModel:
+                                      controller.lostItemReportsList[index],
+                                );
+                              },
                             );
                           }),
                     ],

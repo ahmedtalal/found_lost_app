@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinput/pinput.dart';
 
 class VerifyPhoneNumber extends StatefulWidget {
-  const VerifyPhoneNumber({Key? key}) : super(key: key);
-
+  const VerifyPhoneNumber({required this.verificationCode, Key? key})
+      : super(key: key);
+  final String verificationCode;
   @override
   State<VerifyPhoneNumber> createState() => _VerifyPhoneNumberState();
 }
 
 class _VerifyPhoneNumberState extends State<VerifyPhoneNumber> {
+  String code = '';
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -51,78 +55,90 @@ class _VerifyPhoneNumberState extends State<VerifyPhoneNumber> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        margin: const EdgeInsets.only(left: 25, right: 25),
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/img1.png',
-                width: 200,
-                height: 200,
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              const Text(
-                "Phone Verification",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "We need to register your phone without getting started!",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Pinput(
-                length: 6,
-                // defaultPinTheme: defaultPinTheme,
-                // focusedPinTheme: focusedPinTheme,
-                // submittedPinTheme: submittedPinTheme,
-
-                showCursor: true,
-                onCompleted: (pin) => print(pin),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 45,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green.shade600,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {},
-                    child: const Text("Verify Phone Number")),
-              ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: const Text(
-                      "Edit Phone Number ?",
-                      style: TextStyle(color: Colors.black),
+      body: GetBuilder<AuthController>(
+          init: AuthController.instance,
+          builder: (controller) {
+            return Container(
+              margin: const EdgeInsets.only(left: 25, right: 25),
+              alignment: Alignment.center,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/img1.png',
+                      width: 200,
+                      height: 200,
                     ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    const Text(
+                      "Phone Verification",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "We need to register your phone without getting started!",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Pinput(
+                      length: 6,
+                      // defaultPinTheme: defaultPinTheme,
+                      // focusedPinTheme: focusedPinTheme,
+                      // submittedPinTheme: submittedPinTheme,
+
+                      showCursor: true,
+                      onCompleted: (pin) => print(pin),
+                      onChanged: (value) {
+                        code = value;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green.shade600,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: () {
+                          controller.onClickVerifyPhoneNumber(
+                              widget.verificationCode, code);
+                        },
+                        child: const Text("Verify Phone Number"),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text(
+                            "Edit Phone Number ?",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            );
+          }),
     );
   }
 }

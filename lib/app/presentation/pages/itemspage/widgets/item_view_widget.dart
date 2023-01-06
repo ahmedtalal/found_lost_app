@@ -13,7 +13,9 @@ class ItemViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(()=> ItemReportDetailsPage(itemReportModel: itemReportModel));
+        Get.offAll(
+          () => ItemReportDetailsPage(itemReportModel: itemReportModel),
+        );
       },
       child: Card(
         color: Colors.white,

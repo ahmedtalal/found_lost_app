@@ -7,5 +7,6 @@ abstract class IUserRepository {
   Future<Map<String,dynamic>> displayAllUsers();
   Future<Map<String,dynamic>> displaySpecialUser(var index);
   Future<Map<String, dynamic>> uploadUserImage(var imageFile);
+  Future<Map<String, dynamic>> addUserInfo(UserEntity userEntity);
 
 }

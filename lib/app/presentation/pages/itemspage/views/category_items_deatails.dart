@@ -10,10 +10,9 @@ import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/use
 import 'package:found_lost_app/app/presentation/shared/widgets/Text_btn_shared_widget.dart';
 import 'package:found_lost_app/app/presentation/shared/widgets/custom_text_shared_widget.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
-class ItemReportDetailsPage extends StatelessWidget {
-  const ItemReportDetailsPage({required this.itemReportModel, Key? key})
+class CategoryItemsDetails extends StatelessWidget {
+  const CategoryItemsDetails({required this.itemReportModel, Key? key})
       : super(key: key);
   final ItemReportModel itemReportModel;
 
@@ -32,23 +31,38 @@ class ItemReportDetailsPage extends StatelessWidget {
             children: [
               SizedBox(height: ScreenHandler.getScreenHeight(context) / 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.offAll(() => const HomePage());
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 17,
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      CustomTextSharedWidget(
+                        textTitle: "Item Details",
+                        titleStyle: TextStyle(
+                          fontSize: 15,
+                          fontFamily: appFont,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                   InkWell(
-                    onTap: () {
-                      Get.offAll(() => const HomePage());
+                    onTap: (){
+
                     },
                     child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 17,
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  CustomTextSharedWidget(
-                    textTitle: "Item Details",
-                    titleStyle: TextStyle(
-                      fontSize: 15,
-                      fontFamily: appFont,
-                      fontWeight: FontWeight.bold,
+                      Icons.delete,
+                      size: 20,
+                      color: Colors.red,
                     ),
                   ),
                 ],
@@ -167,7 +181,8 @@ class ItemReportDetailsPage extends StatelessWidget {
                       init: UserProfileController.instance,
                       initState: (state) {
                         state.controller!.getSpecialUserProfileState(
-                            FirebaseAuth.instance.currentUser!.uid);
+                          itemReportModel.userId!,
+                        );
                       },
                       builder: (controller) {
                         if (controller.isLoading.value) {
@@ -195,8 +210,7 @@ class ItemReportDetailsPage extends StatelessWidget {
                                     height: 35,
                                     width: 35,
                                     fit: BoxFit.cover,
-                                    imageUrl:
-                                        controller.userModel.value.image!,
+                                    imageUrl: controller.userModel.value.image!,
                                     placeholder: (context, url) => const Center(
                                         child: CircularProgressIndicator()),
                                     errorWidget: (context, url, error) =>
@@ -210,7 +224,9 @@ class ItemReportDetailsPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      controller.userModel.value.email!,
+                                      controller.userModel.value.email == " "
+                                          ? "Unknown"
+                                          : controller.userModel.value.email!,
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontFamily: appFont,
@@ -219,7 +235,9 @@ class ItemReportDetailsPage extends StatelessWidget {
                                     ),
                                     SizedBox(height: 3),
                                     Text(
-                                      "Name : ${controller.userName.value}",
+                                      controller.userModel.value.userName == " "
+                                          ? "Unknown"
+                                          : "Name : ${controller.userModel.value.userName}",
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontFamily: appFont,

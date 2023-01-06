@@ -32,3 +32,15 @@ class UploadUserImageCase {
       var imageFile, IUserRepository iUserRepository) async =>
       await iUserRepository.uploadUserImage(imageFile);
 }
+
+
+class AddUserInfoUseCase {
+  static final AddUserInfoUseCase _addUserInfoUseCase =
+  AddUserInfoUseCase._internal();
+  AddUserInfoUseCase._internal();
+  static AddUserInfoUseCase get instance => _addUserInfoUseCase;
+
+  Future<Map<String, dynamic>> call(
+      UserModel model, IUserRepository iUserRepository) async =>
+      await iUserRepository.addUser(model);
+}

@@ -28,14 +28,14 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomePageController>(
+    return GetX<HomePageController>(
       init: HomePageController.instance,
       builder: (controller) {
         return Scaffold(
           bottomNavigationBar: BubbleBottomBar(
             hasNotch: false,
             opacity: 0.9,
-            currentIndex: controller.currentIndex,
+            currentIndex: controller.currentIndex.value,
             onTap: controller.switchPages,
             elevation: 3.0,
             borderRadius: const BorderRadius.vertical(
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
           ),
           body: SafeArea(
             top: false,
-            child: pages.elementAt(controller.currentIndex),
+            child: pages.elementAt(controller.currentIndex.value),
           ),
         );
       },

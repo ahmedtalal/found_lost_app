@@ -247,4 +247,9 @@ class AddItemReportController extends GetxController {
     isLoadingIcon = value;
     update();
   }
+  @override
+  void dispose() {
+    AddItemReportController.instance.dispose();
+    super.dispose();
+  }
 }

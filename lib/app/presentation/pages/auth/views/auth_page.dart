@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:found_lost_app/app/presentation/pages/auth/logic/getx/auth_controller.dart';
 import 'package:found_lost_app/app/presentation/pages/auth/views/auth_phone_number_page.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
 import 'package:found_lost_app/app/core/constants/app_colors.dart';
@@ -106,13 +108,20 @@ class AuthPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 20),
-                  CustomIconBtnSharedWidget(
-                    title: "Google",
-                    containerColor: Colors.white,
-                    textColor: Colors.blue,
-                    containerBorderColor: customColor8,
-                    onClick: () {},
-                    icon: googleImg,
+                  GetBuilder<AuthController>(
+                    init: AuthController.instance,
+                    builder: (controller) {
+                      return CustomIconBtnSharedWidget(
+                        title: "Google",
+                        containerColor: Colors.white,
+                        textColor: Colors.blue,
+                        containerBorderColor: customColor8,
+                        onClick: () {
+                          controller.onClickLoginUsingGoogle();
+                        },
+                        icon: googleImg,
+                      );
+                    }
                   ),
                   const SizedBox(height: 20),
                   const CustomTextSharedWidget(

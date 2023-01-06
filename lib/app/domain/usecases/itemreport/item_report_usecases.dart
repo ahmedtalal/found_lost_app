@@ -33,3 +33,25 @@ class UploadItemImageUseCase {
           var imageFile, IReportItemRepository itemRepository) async =>
       await itemRepository.uploadItemImage(imageFile);
 }
+
+class UpdateItemReportUseCase {
+  static final UpdateItemReportUseCase _updateItemReportUseCase =
+      UpdateItemReportUseCase._internal();
+  UpdateItemReportUseCase._internal();
+  static UpdateItemReportUseCase get instance => _updateItemReportUseCase;
+
+  Future<Map<String, dynamic>> call(ItemReportEntity itemReportEntity,
+          IReportItemRepository itemRepository) async =>
+      await itemRepository.updateItemReport(itemReportEntity);
+}
+
+class DeleteItemReportUseCase {
+  static final DeleteItemReportUseCase _deleteItemReportUseCase =
+      DeleteItemReportUseCase._internal();
+  DeleteItemReportUseCase._internal();
+  static DeleteItemReportUseCase get instance => _deleteItemReportUseCase;
+
+  Future<Map<String, dynamic>> call(
+          String itemId, IReportItemRepository itemRepository) async =>
+      await itemRepository.deleteItemReport(itemId);
+}

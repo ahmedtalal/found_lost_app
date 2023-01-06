@@ -72,7 +72,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               textColor: Colors.blue,
               containerBorderColor: Colors.white,
               onClick: () {
-                Get.to(() => const AuthPage());
+                Get.offAll(() => const AuthPage());
               },
             ),
           ],

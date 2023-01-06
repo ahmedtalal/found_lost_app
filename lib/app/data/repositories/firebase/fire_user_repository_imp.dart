@@ -45,4 +45,9 @@ class FireUserRepositoryImp implements IUserRepository {
   Future<Map<String, dynamic>> uploadUserImage(imageFile) async{
     return await FireUserServices.instance.fireUploadUserImage(imageFile);
   }
+
+  @override
+  Future<Map<String, dynamic>> addUserInfo(UserEntity userEntity) async{
+   return await FireUserServices.instance.fireAddUserInfo(userEntity);
+  }
 }
