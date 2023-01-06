@@ -20,9 +20,8 @@ class FireItemReportRepositoryItem implements IReportItemRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> deleteItemReport(itemId) {
-    // TODO: implement deleteItemReport
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> deleteItemReport(itemId) async {
+    return await FireItemReportServices.instance.fireDeleteItemReport(itemId);
   }
 
   @override
@@ -38,9 +37,9 @@ class FireItemReportRepositoryItem implements IReportItemRepository {
 
   @override
   Future<Map<String, dynamic>> updateItemReport(
-      ItemReportEntity itemReportEntity) {
-    // TODO: implement updateItemReport
-    throw UnimplementedError();
+      ItemReportEntity itemReportEntity) async {
+    return await FireItemReportServices.instance
+        .fireUpdateItemReport(itemReportEntity);
   }
 
   @override

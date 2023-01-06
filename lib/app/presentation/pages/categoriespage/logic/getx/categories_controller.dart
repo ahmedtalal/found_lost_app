@@ -4,6 +4,7 @@ import 'package:found_lost_app/app/core/constants/app_colors.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
 import 'package:found_lost_app/app/data/models/item_report_model.dart';
 import 'package:found_lost_app/app/data/repositories/firebase/fire_item_report_repository_imp.dart';
+import 'package:found_lost_app/app/domain/entities/item_report_entity.dart';
 import 'package:found_lost_app/app/domain/usecases/itemreport/item_report_usecases.dart';
 import 'package:get/get.dart';
 
@@ -13,21 +14,23 @@ class CategoriesController extends GetxController {
   CategoriesController._internal();
   static CategoriesController get instance => _categoriesController;
 
-  var itemReportslist = <ItemReportModel>[].obs;
-  var lostItemReportslist = <ItemReportModel>[].obs;
-  var foundItemReportslist = <ItemReportModel>[].obs;
-  var isLoadding = true.obs;
+  var itemReportsList = <ItemReportModel>[].obs;
+  var lostItemReportsList = <ItemReportModel>[].obs;
+  var foundItemReportsList = <ItemReportModel>[].obs;
+  var isLoading = true.obs;
 
   getAllItemReports() async {
     try {
-      isLoadding(true);
+      isLoading(true);
       final result = await GetAllItemReportsUseCase.instance
           .call(FireItemReportRepositoryItem.instance);
       if (result[mapKey].toString().toLowerCase() == "success") {
-        filterItemReports(itemslist: result[mapValue]);
+        filterItemReports(itemsList: result[mapValue]);
+        foundItemReportsFiltration(itemReportsList);
+        lostItemReportsFiltration(itemReportsList);
         print(result[mapValue].toString());
       } else {
-        isLoadding(false);
+        isLoading(false);
         return Get.snackbar(
           "item reports Exception",
           result[mapValue],
@@ -61,30 +64,49 @@ class CategoriesController extends GetxController {
         );
       }
     } finally {
-      isLoadding(false);
+      isLoading(false);
     }
   }
 
-  void filterItemReports({required List<ItemReportModel> itemslist}) {
+  void filterItemReports({required List<ItemReportModel> itemsList}) {
+    itemReportsList.clear();
     String userId = FirebaseAuth.instance.currentUser!.uid;
-    for (ItemReportModel itemReport in itemslist) {
+    for (ItemReportModel itemReport in itemsList) {
       if (itemReport.userId! != userId) {
-        itemReportslist.add(itemReport);
-      }
-      if (itemReport.userId != userId &&
-          itemReport.reporttype!.toLowerCase() == "lost") {
-        lostItemReportslist.add(itemReport);
-      }
-      if (itemReport.userId != userId &&
-          itemReport.reporttype!.toLowerCase() == "found") {
-        foundItemReportslist.add(itemReport);
+        itemReportsList.add(itemReport);
       }
     }
   }
 
-  @override
-  void onInit() {
-    getAllItemReports();
-    super.onInit();
+  void foundItemReportsFiltration(List<ItemReportModel> itemList){
+    foundItemReportsList.clear();
+    for(ItemReportModel itemReportModel in itemList){
+      if(itemReportModel.reporttype.toString().toLowerCase() =="found"){
+        foundItemReportsList.add(itemReportModel);
+      }
+    }
   }
+  void lostItemReportsFiltration(List<ItemReportModel> itemList){
+    lostItemReportsList.clear();
+    for(ItemReportModel itemReportModel in itemList){
+      if(itemReportModel.reporttype.toString().toLowerCase() =="lost"){
+        lostItemReportsList.add(itemReportModel);
+      }
+    }
+  }
+
+
+  updateItemReport(ItemReportEntity itemReportEntity)async{
+
+  }
+  // @override
+  // void onInit() {
+  //   getAllItemReports();
+  //   super.onInit();
+  // }
+  // @override
+  // void dispose() {
+  //   CategoriesController.instance.dispose();
+  //   super.dispose();
+  // }
 }

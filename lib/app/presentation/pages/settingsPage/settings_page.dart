@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:found_lost_app/app/presentation/pages/itemspage/views/item_type_page.dart';
-import 'package:found_lost_app/app/presentation/pages/itemspage/views/items_page.dart';
 import 'package:found_lost_app/app/presentation/pages/userprofile/logic/getx/userprofile_controller.dart';
 import 'package:get/get.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
@@ -11,7 +10,6 @@ import 'package:found_lost_app/app/presentation/pages/auth/views/changepassword_
 import 'package:found_lost_app/app/presentation/pages/settingsPage/widgets/settings_model_widget.dart';
 import 'package:found_lost_app/app/presentation/pages/userprofile/userprofile_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -32,6 +30,10 @@ class SettingsPage extends StatelessWidget {
           children: [
             GetX<UserProfileController>(
               init: UserProfileController.instance,
+              initState: (state) {
+                state.controller!.getSpecialUserProfileState(
+                    FirebaseAuth.instance.currentUser!.uid);
+              },
               builder: (controller) {
                 if (controller.isLoading.value) {
                   return const Center(
@@ -53,13 +55,13 @@ class SettingsPage extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.red, width: 2.5),
                           ),
-                          child:  CachedNetworkImage(
+                          child: CachedNetworkImage(
                             height: 35,
                             width: 35,
                             fit: BoxFit.cover,
-                            imageUrl: controller.userProfileImage.value,
-                            placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator()),
+                            imageUrl: controller.userModel.value.image!,
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) => const Image(
                               image: AssetImage(userImage),
                             ),
@@ -70,7 +72,9 @@ class SettingsPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              controller.userName.value,
+                              controller.userModel.value.userName == " "
+                                  ? "UnKnown User"
+                                  : controller.userModel.value.userName!,
                               style: TextStyle(
                                 fontSize: 15,
                                 fontFamily: appFont,
@@ -113,7 +117,7 @@ class SettingsPage extends StatelessWidget {
               image: foundImg,
               color: Colors.teal,
               onClick: () {
-                Get.to(() => const ItemTypepage(itemReportType: "found"));
+                Get.to(() => const ItemTypePage(itemReportType: "found"));
               },
             ),
             const SizedBox(height: 10),
@@ -122,16 +126,7 @@ class SettingsPage extends StatelessWidget {
               image: lostImg,
               color: Colors.teal,
               onClick: () {
-                Get.to(() => const ItemTypepage(itemReportType: "lost"));
-              },
-            ),
-            const SizedBox(height: 10),
-            SettingBodySections(
-              title: "My items",
-              image: editUserImage,
-              color: Colors.teal,
-              onClick: () {
-                Get.to(() => const ItemsPage());
+                Get.to(() => const ItemTypePage(itemReportType: "lost"));
               },
             ),
             SizedBox(height: ScreenHandler.getScreenHeight(context) / 80),
@@ -208,8 +203,8 @@ class SettingsPage extends StatelessWidget {
                     title: "LogOut",
                     image: logoutImage,
                     color: const Color.fromARGB(255, 230, 65, 120),
-                    onClick: () {
-                      authController.onClickLogoutBtn();
+                    onClick: () async {
+                      await authController.onClickLogoutBtn();
                     },
                   );
                 }),

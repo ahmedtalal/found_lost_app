@@ -6,6 +6,10 @@ abstract class IAuthRepository {
   Future<Map<String, dynamic>> forgetPassword(var email);
   Future<Map<String, dynamic>> updatePassword(
       var currentPassword, var newPassword);
-  bool logOut();
+  Future<Map<String,dynamic>> logOut();
   bool checkIsAuth();
+  Future<Map<String, dynamic>> loginUsingPhoneNumber(String phoneNumber);
+  Future<Map<String, dynamic>> loginUsingGoogle();
+
+
 }

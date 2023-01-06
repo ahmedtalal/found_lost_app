@@ -56,6 +56,13 @@ class UserProfileController extends GetxController {
 
   _getUserProfileState() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
+    print("the user id is >:$userId");
+    userName.refresh();
+    email.refresh();
+    userProfileImage.refresh();
+    address.refresh();
+    phone.refresh();
+    bioInfo.refresh();
     try {
       isLoading(true);
       final result = await GetUserUseCase.instance
@@ -107,15 +114,15 @@ class UserProfileController extends GetxController {
     }
   }
 
-  UserModel userModel = UserModel();
+  var userModel = UserModel().obs;
   getSpecialUserProfileState(String userId) async {
     try {
       isLoading(true);
+      userModel.refresh();
       final result = await GetUserUseCase.instance
           .call(userId, FireUserRepositoryImp.instance);
       if (result[mapKey].toString().toLowerCase() == "success") {
-        userModel = result[mapValue];
-        update();
+        userModel.value = result[mapValue];
       } else {
         isLoading(false);
         return Get.snackbar(
@@ -150,7 +157,41 @@ class UserProfileController extends GetxController {
           ),
         );
       }
-    } finally {
+    }catch(e){
+      isLoading(false);
+      return Get.snackbar(
+        "user profile Exception",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: customColor6,
+        colorText: Colors.white,
+        borderRadius: 15,
+        margin: const EdgeInsets.all(5),
+        duration: const Duration(seconds: 4),
+        isDismissible: true,
+        forwardAnimationCurve: Curves.easeOutBack,
+        icon: const Icon(Icons.error),
+        messageText: Text(
+          e.toString(),
+          style: const TextStyle(
+            fontSize: 16,
+            fontFamily: appFont,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        titleText: const Text(
+          "user profile Exception",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: appFont,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
+    }
+    finally {
       isLoading(false);
     }
   }

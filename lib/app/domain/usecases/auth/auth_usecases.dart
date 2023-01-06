@@ -26,7 +26,8 @@ class LogOutUseCase {
   LogOutUseCase._internal();
   static LogOutUseCase get instance => _logOutUseCase;
 
-  bool call(IAuthRepository iAuthRepository) => iAuthRepository.logOut();
+  Future<Map<String, dynamic>> call(IAuthRepository iAuthRepository) async =>
+      await iAuthRepository.logOut();
 }
 
 class CheckIsAuthUseCase {
@@ -47,4 +48,26 @@ class UpdatePasswordUseCase {
   Future<Map<String, dynamic>> call(var currentPassword, var newPassword,
           IAuthRepository iAuthRepository) async =>
       await iAuthRepository.updatePassword(currentPassword, newPassword);
+}
+
+class LoginUsingPhoneNumberUseCase {
+  static final LoginUsingPhoneNumberUseCase _loginUsingPhoneNumberUseCase =
+      LoginUsingPhoneNumberUseCase._internal();
+  LoginUsingPhoneNumberUseCase._internal();
+  static LoginUsingPhoneNumberUseCase get instance =>
+      _loginUsingPhoneNumberUseCase;
+
+  Future<Map<String, dynamic>> call(
+          var phoneNumber, IAuthRepository iAuthRepository) async =>
+      await iAuthRepository.loginUsingPhoneNumber(phoneNumber);
+}
+
+class LoginUsingGoogleUseCase {
+  static final LoginUsingGoogleUseCase _loginUsingGoogleUseCase =
+      LoginUsingGoogleUseCase._internal();
+  LoginUsingGoogleUseCase._internal();
+  static LoginUsingGoogleUseCase get instance => _loginUsingGoogleUseCase;
+
+  Future<Map<String, dynamic>> call(IAuthRepository iAuthRepository) async =>
+      await iAuthRepository.loginUsingGoogle();
 }

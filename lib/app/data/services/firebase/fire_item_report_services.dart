@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:found_lost_app/app/core/constants/strings.dart';
 import 'package:found_lost_app/app/data/models/item_report_model.dart';
@@ -91,6 +90,29 @@ class FireItemReportServices {
       String url = await reference.getDownloadURL();
       return successRequest(responseBody: url);
     } catch (e) {
+      return failedRequest(responseBody: e.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> fireUpdateItemReport(
+      ItemReportEntity itemReportEntity) async {
+    try {
+      DocumentReference docRef = _collRef.doc(itemReportEntity.itemId);
+      Map<String, dynamic> data = ItemReportModel.toJson(itemReportEntity);
+      await docRef.update(data);
+      return successRequest(responseBody: true);
+    } catch (e) {
+      print("the update item report error is :$e");
+      return failedRequest(responseBody: e.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> fireDeleteItemReport(String itemId) async {
+    try {
+      await _collRef.doc(itemId).delete();
+      return successRequest(responseBody: true);
+    } catch (e) {
+      print("the get special item error is :${e.toString()}");
       return failedRequest(responseBody: e.toString());
     }
   }

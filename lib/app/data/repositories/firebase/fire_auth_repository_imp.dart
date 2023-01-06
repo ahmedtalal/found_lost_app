@@ -21,8 +21,8 @@ class FireAuthRepositoryImp extends IAuthRepository {
   }
 
   @override
-  bool logOut() {
-    return FireAuthServices.instance.fireLogOut();
+  Future<Map<String,dynamic>> logOut() async{
+    return await FireAuthServices.instance.fireLogOut();
   }
 
   @override
@@ -40,5 +40,15 @@ class FireAuthRepositoryImp extends IAuthRepository {
       currentPassword, newPassword) async {
     return await FireAuthServices.instance
         .fireUpdatePassword(currentPassword, newPassword);
+  }
+
+  @override
+  Future<Map<String, dynamic>> loginUsingPhoneNumber(String phoneNumber) async{
+    return await FireAuthServices.instance.fireAuthUsingPhoneNumber(phoneNumber);
+  }
+
+  @override
+  Future<Map<String, dynamic>> loginUsingGoogle() async{
+   return await FireAuthServices.instance.fireLoginUsingGoogle();
   }
 }

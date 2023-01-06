@@ -57,18 +57,21 @@ class ItemsPage extends StatelessWidget {
             ),
             GetX<ItemsController>(
                 init: ItemsController.instance,
+                initState: (state){
+                  state.controller!.getAllItemReportsByUserId();
+                },
                 builder: ((controller) {
-                  if (controller.isLoadding.value) {
+                  if (controller.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (controller.itemReportslist.isEmpty) {
+                  } else if (controller.itemReportsList.isEmpty) {
                     return EmptyItemReportsWidget();
                   }
                   return Expanded(
                     child: ListView.builder(
-                        itemCount: controller.itemReportslist.length,
-                        itemBuilder: (BuildContext contex, int index) {
+                        itemCount: controller.itemReportsList.length,
+                        itemBuilder: (BuildContext context, int index) {
                           return ItemViewWidget(
-                            itemReportModel: controller.itemReportslist[index],
+                            itemReportModel: controller.itemReportsList[index],
                           );
                         }),
                   );
