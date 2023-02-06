@@ -81,12 +81,10 @@ class ItemsController extends GetxController {
       }
     }
   }
-  //
-  // @override
-  // void onInit() async{
-  //   await getAllItemReportsByUserId();
-  //   super.onInit();
-  // }
 
-
+  @override
+  void onInit() {
+    getAllItemReportsByUserId();
+    super.onInit();
+  }
 }

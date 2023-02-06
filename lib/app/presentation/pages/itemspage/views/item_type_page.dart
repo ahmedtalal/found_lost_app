@@ -28,7 +28,8 @@ class ItemTypePage extends StatelessWidget {
               height: ScreenHandler.getScreenHeight(context) / 12,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
                   onTap: () {
@@ -37,8 +38,10 @@ class ItemTypePage extends StatelessWidget {
                   child: const Icon(
                     Icons.arrow_back_ios,
                     size: 20,
-                    color: Colors.black,
                   ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 CustomTextSharedWidget(
                   textTitle: "$itemReportType items",
@@ -46,7 +49,6 @@ class ItemTypePage extends StatelessWidget {
                     fontSize: 18,
                     fontFamily: appFont,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
                 // InkWell(
@@ -61,9 +63,9 @@ class ItemTypePage extends StatelessWidget {
             ),
             GetX<ItemsController>(
               init: ItemsController.instance,
-              initState: (state){
-                state.controller!.getAllItemReportsByUserId();
-              },
+              // initState: (state) {
+              //   state.controller!.getAllItemReportsByUserId();
+              // },
               builder: (controller) {
                 if (controller.isLoading.value) {
                   return const Center(
@@ -102,11 +104,11 @@ class ItemTypeView extends StatelessWidget {
   Widget build(BuildContext context) {
     print("the owner of this item is : ${itemReportModel.userId}");
     return InkWell(
-      onTap: (){
-        Get.offAll(()=> ItemReportDetailsPage(itemReportModel: itemReportModel));
+      onTap: () {
+        Get.offAll(
+            () => ItemReportDetailsPage(itemReportModel: itemReportModel));
       },
       child: Card(
-        color: Colors.white,
         shadowColor: Colors.grey[200],
         elevation: 5,
         child: Padding(
@@ -128,7 +130,7 @@ class ItemTypeView extends StatelessWidget {
                 child: CachedNetworkImage(
                   height: 50,
                   width: 50,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   imageUrl: itemReportModel.photo!,
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
@@ -189,76 +191,101 @@ class ItemReportView extends StatelessWidget {
   Widget build(BuildContext context) {
     print("the owner of this item is : ${itemReportModel.userId}");
     return InkWell(
-      onTap: (){
-        Get.offAll(()=> CategoryItemsDetails(itemReportModel: itemReportModel));
+      onTap: () {
+        Get.offAll(
+            () => CategoryItemsDetails(itemReportModel: itemReportModel));
       },
       child: Card(
-        color: Colors.white,
         shadowColor: Colors.grey[200],
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 0.3,
-                  ),
-                ),
-                child: CachedNetworkImage(
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.fill,
-                  imageUrl: itemReportModel.photo!,
-                  placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Image(
-                    image: AssetImage(emptyData),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomTextSharedWidget(
-                      textTitle: "${itemReportModel.reporttype} Item",
-                      titleStyle: const TextStyle(
-                        fontSize: 16,
-                        fontFamily: appFont,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: itemReportModel.photo!,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Image(
+                          image: AssetImage(emptyData),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    CustomTextSharedWidget(
-                      textTitle: itemReportModel.description!,
-                      titleStyle: const TextStyle(
-                        fontSize: 13,
-                        fontFamily: appFont,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    CustomTextSharedWidget(
-                      textTitle: itemReportModel.country!,
-                      titleStyle: const TextStyle(
-                        fontSize: 14,
-                        fontFamily: appFont,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomTextSharedWidget(
+                            textTitle: "${itemReportModel.reporttype} Item",
+                            titleStyle: const TextStyle(
+                              fontSize: 15,
+                              fontFamily: appFont,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 1),
+                          CustomTextSharedWidget(
+                            textTitle: itemReportModel.description!,
+                            titleStyle: const TextStyle(
+                              fontSize: 13,
+                              fontFamily: appFont,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(height: 1),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                size: 12,
+                              ),
+                              const SizedBox(width: 4),
+                              CustomTextSharedWidget(
+                                textTitle: itemReportModel.country!,
+                                titleStyle: const TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: appFont,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.offAll(() =>
+                      CategoryItemsDetails(itemReportModel: itemReportModel));
+                },
+                child: Icon(
+                  Icons.chevron_right,
+                  size: 20,
                 ),
               ),
             ],

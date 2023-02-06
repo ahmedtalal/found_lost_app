@@ -59,7 +59,9 @@ class SettingsPage extends StatelessWidget {
                             height: 35,
                             width: 35,
                             fit: BoxFit.cover,
-                            imageUrl: controller.userModel.value.image!,
+                            imageUrl: controller.userModel.value.image == null
+                                ? userImage
+                                : controller.userModel.value.image!,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) => const Image(

@@ -78,32 +78,30 @@ class CategoriesController extends GetxController {
     }
   }
 
-  void foundItemReportsFiltration(List<ItemReportModel> itemList){
+  void foundItemReportsFiltration(List<ItemReportModel> itemList) {
     foundItemReportsList.clear();
-    for(ItemReportModel itemReportModel in itemList){
-      if(itemReportModel.reporttype.toString().toLowerCase() =="found"){
+    for (ItemReportModel itemReportModel in itemList) {
+      if (itemReportModel.reporttype.toString().toLowerCase() == "found") {
         foundItemReportsList.add(itemReportModel);
       }
     }
   }
-  void lostItemReportsFiltration(List<ItemReportModel> itemList){
+
+  void lostItemReportsFiltration(List<ItemReportModel> itemList) {
     lostItemReportsList.clear();
-    for(ItemReportModel itemReportModel in itemList){
-      if(itemReportModel.reporttype.toString().toLowerCase() =="lost"){
+    for (ItemReportModel itemReportModel in itemList) {
+      if (itemReportModel.reporttype.toString().toLowerCase() == "lost") {
         lostItemReportsList.add(itemReportModel);
       }
     }
   }
 
-
-  updateItemReport(ItemReportEntity itemReportEntity)async{
-
+  updateItemReport(ItemReportEntity itemReportEntity) async {}
+  @override
+  void onInit() {
+    getAllItemReports();
+    super.onInit();
   }
-  // @override
-  // void onInit() {
-  //   getAllItemReports();
-  //   super.onInit();
-  // }
   // @override
   // void dispose() {
   //   CategoriesController.instance.dispose();

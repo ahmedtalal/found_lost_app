@@ -75,66 +75,44 @@ class AddItemPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    const CustomTextSharedWidget(
-                      textTitle: "report type",
-                      titleStyle: TextStyle(
-                        fontSize: 15,
-                        fontFamily: appFont,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                    DropdownButtonFormField(
+                      value: controller.reportTypeValue,
+                      items: controller.reportTypeList
+                          .map(
+                            (e) => DropdownMenuItem(
+                              value: e,
+                              child: CustomTextSharedWidget(
+                                textTitle: e.toString(),
+                                titleStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: appFont,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (newValue) {
+                        controller.onClickReportTypeDropDown(newValue!);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_drop_down_circle,
+                        color: Colors.deepPurple,
                       ),
-                    ),
-                    const SizedBox(height: 15),
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            controller.onChangeReportType("lost");
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: ScreenHandler.getScreenHeight(context) / 18,
-                            width: ScreenHandler.getScreenWidth(context) / 4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: customeColor2,
-                            ),
-                            child: const Text(
-                              "Lost",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: appFont,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                      dropdownColor: Colors.deepPurple.shade50,
+                      decoration: InputDecoration(
+                        labelText: "report type",
+                        labelStyle: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: appFont,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {
-                            controller.onChangeReportType("found");
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: ScreenHandler.getScreenHeight(context) / 18,
-                            width: ScreenHandler.getScreenWidth(context) / 4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: customeColor4,
-                            ),
-                            child: const Text(
-                              "Found",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: appFont,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: customBorder(),
+                        enabledBorder: customBorder(),
+                        focusedBorder: customBorder(),
+                      ),
                     ),
                     const SizedBox(height: 15),
                     SizedBox(
