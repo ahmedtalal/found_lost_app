@@ -41,7 +41,12 @@ class AddItemReportController extends GetxController {
     "Devices",
     "Another Things",
   ];
+  List<String> reportTypeList = [
+    "Found",
+    "Lost",
+  ];
   String mainCategorydefaultValue = "Mobiles";
+  String reportTypeValue = "Found";
 
   onChangeReportType(String? value) {
     reportType = value!;
@@ -179,7 +184,7 @@ class AddItemReportController extends GetxController {
       String itemId = ItemReportModel.generateItemId();
       ItemReportEntity itemReportEntity = ItemReportModel(
         itemId,
-        reportType,
+        reportTypeValue,
         name,
         description,
         mainCategorydefaultValue,
@@ -242,11 +247,17 @@ class AddItemReportController extends GetxController {
     update();
   }
 
+  onClickReportTypeDropDown(String value) {
+    reportTypeValue = value;
+    update();
+  }
+
   // this is private method for class
   _loadingIcon(bool value) {
     isLoadingIcon = value;
     update();
   }
+
   @override
   void dispose() {
     AddItemReportController.instance.dispose();

@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:found_lost_app/app/config/screen_handler.dart';
 import 'package:found_lost_app/app/core/constants/app_colors.dart';
@@ -55,125 +54,286 @@ class CategoryItemsDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  InkWell(
-                    onTap: (){
-
-                    },
-                    child: Icon(
-                      Icons.delete,
-                      size: 20,
-                      color: Colors.red,
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 15),
-              Container(
-                height: ScreenHandler.getScreenHeight(context) / 4,
-                width: double.maxFinite,
-                child: CachedNetworkImage(
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.fill,
-                  imageUrl: itemReportModel.photo!,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Image(
-                    image: AssetImage(emptyData),
+              Material(
+                elevation: 10,
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  height: ScreenHandler.getScreenHeight(context) / 4.5,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: CachedNetworkImage(
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.fill,
+                    imageUrl: itemReportModel.photo!,
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Image(
+                      image: AssetImage(emptyData),
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 15),
               Container(
-                height: ScreenHandler.getScreenHeight(context) / 1.7,
                 width: double.maxFinite,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey, width: 0.6),
+                  border: Border.all(color: Colors.grey, width: 0.4),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomTextSharedWidget(
+                          textTitle: "${itemReportModel.reporttype} item",
+                          titleStyle: TextStyle(
+                            fontSize: 20,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              itemReportModel.reportStatus!,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: appFont,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.category_outlined,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Category",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 3),
                     CustomTextSharedWidget(
-                      textTitle: "${itemReportModel.reporttype} item",
+                      textTitle: itemReportModel.mainCategory!,
                       titleStyle: TextStyle(
                         fontSize: 16,
                         fontFamily: appFont,
                         fontWeight: FontWeight.bold,
-                        color: customeColor2,
                       ),
                     ),
                     const SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.badge,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Name",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 3),
                     CustomTextSharedWidget(
-                      textTitle:
-                          "Main Category :${itemReportModel.mainCategory}",
+                      textTitle: itemReportModel.name!,
                       titleStyle: TextStyle(
                         fontSize: 16,
                         fontFamily: appFont,
                         fontWeight: FontWeight.bold,
-                        color: customeColor2,
                       ),
                     ),
                     const SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.description,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "description",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 3),
                     CustomTextSharedWidget(
-                      textTitle: "Name :${itemReportModel.name}",
+                      textTitle: itemReportModel.description!,
                       titleStyle: TextStyle(
                         fontSize: 16,
                         fontFamily: appFont,
                         fontWeight: FontWeight.bold,
-                        color: customeColor2,
                       ),
                     ),
                     const SizedBox(height: 15),
-                    CustomTextSharedWidget(
-                      textTitle: "Country :${itemReportModel.country}",
-                      titleStyle: TextStyle(
-                        fontSize: 18,
-                        fontFamily: appFont,
-                        fontWeight: FontWeight.bold,
-                        color: customeColor2,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "country",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 3),
                     CustomTextSharedWidget(
-                      textTitle: "City :${itemReportModel.city}",
-                      titleStyle: TextStyle(
-                        fontSize: 16,
-                        fontFamily: appFont,
-                        fontWeight: FontWeight.bold,
-                        color: customeColor2,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextSharedWidget(
-                      textTitle: "phone number :${itemReportModel.phone}",
-                      titleStyle: TextStyle(
-                        fontSize: 18,
-                        fontFamily: appFont,
-                        fontWeight: FontWeight.bold,
-                        color: customeColor2,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextSharedWidget(
-                      textTitle: "Published date:${itemReportModel.date}",
-                      titleStyle: TextStyle(
-                        fontSize: 18,
-                        fontFamily: appFont,
-                        fontWeight: FontWeight.bold,
-                        color: customeColor2,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextSharedWidget(
-                      textTitle: "Published by :",
+                      textTitle: itemReportModel.country!,
                       titleStyle: TextStyle(
                         fontSize: 16,
                         fontFamily: appFont,
                         fontWeight: FontWeight.bold,
-                        color: customeColor2,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.location_city,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "city",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    CustomTextSharedWidget(
+                      textTitle: itemReportModel.city!,
+                      titleStyle: TextStyle(
+                        fontSize: 16,
+                        fontFamily: appFont,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "phone number",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    CustomTextSharedWidget(
+                      textTitle: itemReportModel.phone!,
+                      titleStyle: TextStyle(
+                        fontSize: 16,
+                        fontFamily: appFont,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.date_range,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "date",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: appFont,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    CustomTextSharedWidget(
+                      textTitle: itemReportModel.date!,
+                      titleStyle: TextStyle(
+                        fontSize: 16,
+                        fontFamily: appFont,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 15),

@@ -107,9 +107,9 @@ class _CategoriesPageState extends State<CategoriesPage>
                     children: [
                       GetX<CategoriesController>(
                           init: CategoriesController.instance,
-                          initState: (state) {
-                            state.controller!.getAllItemReports();
-                          },
+                          // initState: (state) {
+                          //   state.controller!.getAllItemReports();
+                          // },
                           builder: (controller) {
                             if (controller.isLoading.value) {
                               return Center(
@@ -131,9 +131,9 @@ class _CategoriesPageState extends State<CategoriesPage>
                           }),
                       GetX<CategoriesController>(
                           init: CategoriesController.instance,
-                          initState: (state) {
-                            state.controller!.getAllItemReports();
-                          },
+                          // initState: (state) {
+                          //   state.controller!.getAllItemReports();
+                          // },
                           builder: (controller) {
                             if (controller.isLoading.value) {
                               return Center(
@@ -155,9 +155,9 @@ class _CategoriesPageState extends State<CategoriesPage>
                           }),
                       GetX<CategoriesController>(
                           init: CategoriesController.instance,
-                          initState: (state) {
-                            state.controller!.getAllItemReports();
-                          },
+                          // initState: (state) {
+                          //   state.controller!.getAllItemReports();
+                          // },
                           builder: (controller) {
                             if (controller.isLoading.value) {
                               return Center(

@@ -18,7 +18,6 @@ class ItemViewWidget extends StatelessWidget {
         );
       },
       child: Card(
-        color: Colors.white,
         shadowColor: Colors.grey[200],
         elevation: 5,
         margin: const EdgeInsets.only(
@@ -83,7 +82,6 @@ class ItemViewWidget extends StatelessWidget {
                                 fontSize: 10,
                                 fontFamily: appFont,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
                               ),
                             ),
                             const SizedBox(width: 10),
@@ -150,7 +148,6 @@ class ItemViewWidget extends StatelessWidget {
                     child: const Icon(
                       Icons.delete,
                       size: 20,
-                      color: Colors.black,
                     ),
                   ),
                   InkWell(
@@ -158,7 +155,6 @@ class ItemViewWidget extends StatelessWidget {
                     child: const Icon(
                       Icons.share,
                       size: 20,
-                      color: Colors.black,
                     ),
                   ),
                   InkWell(
@@ -166,7 +162,6 @@ class ItemViewWidget extends StatelessWidget {
                     child: const Icon(
                       Icons.edit,
                       size: 20,
-                      color: Colors.black,
                     ),
                   ),
                   InkWell(
@@ -174,7 +169,6 @@ class ItemViewWidget extends StatelessWidget {
                     child: const Icon(
                       Icons.task_alt,
                       size: 20,
-                      color: Colors.black,
                     ),
                   ),
                 ],
